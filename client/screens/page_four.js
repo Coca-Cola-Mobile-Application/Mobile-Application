@@ -4,8 +4,7 @@ import {StyleSheet,View,Text,Button} from 'react-native';
 export default function PageFour({ navigation }) {
     return(
         <View style={styles.container}>
-            <Text>this is page four</Text>
-            <Button title="Next" onPress={()=> navigation.navigate('PageFive')} />
+            <Text>this is page four</Text>       
         </View>
     );
 }
@@ -18,3 +17,5 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
   });
+  
+  //<Button title="Next" onPress={()=> navigation.navigate('PageFive')} />

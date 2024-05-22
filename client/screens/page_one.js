@@ -6,7 +6,6 @@ export default function PageOne({ navigation}) {
     return (
         <View style={styles.container}>
             <Text>This is page one</Text>
-            <Button title="Next" onPress={()=> navigation.navigate('PageTwo')}/>
         </View>
     );
 }
@@ -19,3 +18,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+
+//<Button title="Next" onPress={()=> navigation.navigate('PageTwo')}/>

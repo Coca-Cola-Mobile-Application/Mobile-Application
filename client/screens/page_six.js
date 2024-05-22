@@ -1,22 +1,23 @@
 import React from "react";
-import {StyleSheet,View,Text,Button} from 'react-native';
+import { globalStyles } from "../styles/global";
+import { StyleSheet, View, Text, Button } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import Topic from "../components/topic";
 
-export default function PageSix({navigation}) {
+export default function PageSix({ navigation }) {
     return(
-        <View style={styles.container}>
-            <Text>this is page six</Text>
-            
-        </View>
+        <LinearGradient
+            colors={['#4751A0', '#4686A0']}
+            start={{x:0,y:0}}
+            end={{x:1,y:0}}
+            style={globalStyles.container}
+        >
+            <View style={globalStyles.insideContainer}></View>
+        </LinearGradient>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
 
+});
 //<Button title="Next" onPress={()=> navigation.navigate('PageSeven')} />

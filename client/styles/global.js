@@ -13,6 +13,6 @@ export const globalStyles = StyleSheet.create({
         borderTopRightRadius: 50,
         overflow: 'hidden',
         paddingHorizontal:50,
-        paddingVertical:50
+        paddingVertical:50,
     }
 });

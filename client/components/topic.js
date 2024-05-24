@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import {View,Text,StyleSheet} from 'react-native';
+import {Text,StyleSheet} from 'react-native';
 
 
 export default function Topic({topicDetail}) {
@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
         borderRadius:20,
         width:'100%',
         height:50,
-        paddingHorizontal:15
+        paddingHorizontal:15,
+        marginBottom:'5%'
     },
     topicText:{
         fontWeight:'bold',

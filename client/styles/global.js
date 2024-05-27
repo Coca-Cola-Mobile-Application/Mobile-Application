@@ -14,5 +14,10 @@ export const globalStyles = StyleSheet.create({
         overflow: 'hidden',
         paddingHorizontal:50,
         paddingVertical:50,
+    },
+    bodyView:{
+        flex:1,
+        width:'100%',
+        alignItems:'center'
     }
 });

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     topicText:{
         fontWeight:'bold',
         fontSize:17,
-        color:'#fff'
+        color:'#fff',
     }
 })
 

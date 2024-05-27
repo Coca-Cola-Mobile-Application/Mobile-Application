@@ -2,10 +2,10 @@ import React from "react";
 import { globalStyles } from "../styles/global";
 import {topicDetails} from "../data/formtopics";
 import Card from '../components/card';
-import { StyleSheet, View, Text, Button,ScrollView} from 'react-native';
+import { StyleSheet, View, Text, Button,ScrollView,TextInput} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Topic from "../components/topic";
-import DateTimePicker from '@react-native-community/datetimepicker';
+import InputComponent from "../components/textInput";
 
 
 const card_1 =['Date' ,'Time Start','Time End'];
@@ -22,13 +22,11 @@ export default function PageOne({ navigation }) {
         >
             <View style={globalStyles.insideContainer}>
                 <ScrollView>
-                    <View style={styles.bodyView}>
+                    <View style={globalStyles.bodyView}>
                         <Topic topicDetail={topicDetails[0]}/>
                         <Card>
-                            <Text>Test1</Text>
-                            <Text>Test1</Text>
-                            <Text>Test1</Text>
-                            <Text>Test1</Text>
+                            <Text>Test1</Text> 
+                            <InputComponent pickerDisplay={true} editable={false} keyBoardType="default" placeHolder="select date" mode="date"/>
                         </Card>
                         <Topic topicDetail={topicDetails[1]}/>
                         <Card>
@@ -73,26 +71,8 @@ export default function PageOne({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'flex-end',
-    },
-    cardDecoration:{
-        width:'96%',
-        borderRadius:30,
-        elevation:10,
-        backgroundColor:'#fff',
-        shadowOffset:{width:1,height:1},
-        shadowColor:'#333',
-        shadowOpacity:0.3,
-        shadowRadius:2,
-        paddingHorizontal:15,
-        paddingVertical:15,
-        marginBottom:'15%',
-    },
-    bodyView:{
-        flex:1,
-        width:'100%',
-        alignItems:'center'
-    }
+    // container: {
+    //     flex: 1,
+    //     justifyContent: 'flex-end',
+    // },
 });

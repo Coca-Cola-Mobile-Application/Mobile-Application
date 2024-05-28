@@ -18,6 +18,13 @@ export const globalStyles = StyleSheet.create({
     bodyView:{
         flex:1,
         width:'100%',
+        alignItems:'center',
+    },
+    insideBodyView:{
+        width:'100%',
         alignItems:'center'
+    },
+    insideBodyView2:{
+        width:'100%',
     }
 });

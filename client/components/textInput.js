@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, View, TouchableOpacity, Platform, Pressable } fr
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function InputComponent({ pickerDisplay, editable, keyBoardType, placeHolder, mode = "date" }) {
+export default function InputComponent({ pickerDisplay, editable, keyBoardType, placeHolder, mode }) {
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
     const [dpDate, setdpDate] = useState("");
@@ -37,7 +37,7 @@ export default function InputComponent({ pickerDisplay, editable, keyBoardType, 
                         placeholder={placeHolder}
                         multiline={true}
                         value={dpDate}
-                       // onChangeText={setdpDate}
+                        onChangeText={setdpDate}
                     />
                 </Pressable>
             )}
@@ -61,7 +61,7 @@ export default function InputComponent({ pickerDisplay, editable, keyBoardType, 
 const styles = StyleSheet.create({
     inputStyle: {
         flexDirection: 'row',
-        marginBottom: 10,
+        marginBottom:10,
         marginTop: 5,
         backgroundColor: '#E8E8E8',
         justifyContent: 'space-between',
@@ -73,9 +73,10 @@ const styles = StyleSheet.create({
     },
     subStyle: {
         backgroundColor: '#E8E8E8',
-        width: '90%',
+        width:220,
         overflow: 'hidden',
         borderRadius: 10,
         fontWeight: 'bold',
+        color:'#000000'
     },
 });

@@ -5,3 +5,6 @@
 
 if you cannot open app using npm run web , use this one
 - npx expo install react-native-web react-dom @expo/metro-runtime
+
+- cd server
+- npm run dev

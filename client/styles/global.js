@@ -26,5 +26,9 @@ export const globalStyles = StyleSheet.create({
     },
     insideBodyView2:{
         width:'100%',
-    }
+    },
+    checkBoxTitle:{
+        fontWeight:'bold',
+        fontSize:15,
+    }         
 });

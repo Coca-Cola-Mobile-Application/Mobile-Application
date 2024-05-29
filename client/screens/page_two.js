@@ -1,20 +1,43 @@
 import React from "react";
 import { LinearGradient } from 'expo-linear-gradient';
 import { globalStyles } from "../styles/global";
-import {StyleSheet,View,Text,Button,ScrollView} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, FlatList } from 'react-native';
+import { topicDetails } from '../data/formtopics';
+import { optionSet } from '../data/formdata2';
+import Topic from "../components/topic";
+import Card from '../components/card';
+import CheckBoxContainer from '../components/checkBox';  // Corrected import
 
-export default function PageTwo({navigation}) {
-    return(
+export default function PageTwo({ navigation }) {
+    return (
         <LinearGradient
-        colors={['#4751A0', '#4686A0']}
-        start={{x:0,y:0}}
-        end={{x:1,y:0}}
-        style={globalStyles.container}
+            colors={['#4751A0', '#4686A0']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={globalStyles.container}
         >
             <View style={globalStyles.insideContainer}>
-                 <ScrollView>
+                <ScrollView>
                     <View style={globalStyles.bodyView}>
-
+                        <Topic topicDetail={topicDetails[6]} />
+                        <Card>
+                            <View style={styles.notice}>
+                                <Text style={styles.noticeText}>
+                                    Jointly By Issuer And Hand Over Party !
+                                </Text>
+                            </View>
+                        </Card>
+                        <Card>
+                            <FlatList
+                                data={optionSet}
+                                renderItem={({ item }) => (
+                                    <CheckBoxContainer  // Corrected component usage
+                                        optionTitle={item.optionName}
+                                    />
+                                )}
+                                scrollEnabled={false}
+                            />
+                        </Card>
                     </View>
                 </ScrollView>
             </View>
@@ -23,7 +46,12 @@ export default function PageTwo({navigation}) {
 }
 
 const styles = StyleSheet.create({
-   
-  });
-  
-  //<Button title="Next" onPress={()=> navigation.navigate('PageThree')}/>
+    notice: {
+        alignItems: 'center',
+    },
+    noticeText: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'red'
+    }
+});

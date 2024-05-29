@@ -22,6 +22,10 @@ export const topicDetails =[
     {
         number:'6',
         title:'JOB DESCRIPTION'
+    },
+    {
+        number:'7',
+        title:'HAZARDS IDENTIFIED'
     }
 ]
 

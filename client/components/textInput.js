@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     },
     subStyle: {
         backgroundColor: '#E8E8E8',
-        width:210,
+        width:180,
         overflow: 'hidden',
         borderRadius: 10,
         fontWeight: 'bold',

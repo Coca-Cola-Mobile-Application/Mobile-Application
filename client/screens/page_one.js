@@ -42,11 +42,13 @@ export default function PageOne({ navigation }) {
                                                 </View>
                                             )}
                                             keyExtractor={(item) =>item.key}
+                                            scrollEnabled={false}
                                         />
                                     </Card>
                                 </View>
                             )}
                             keyExtractor={(item) => item.topic.number}
+                            scrollEnabled={false}
                         />
                     </View>
                 </ScrollView>

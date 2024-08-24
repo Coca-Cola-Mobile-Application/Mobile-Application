@@ -6,7 +6,7 @@ import { topicDetails } from '../data/formtopics';
 import { optionSet } from '../data/formdata2';
 import Topic from "../components/topic";
 import Card from '../components/card';
-import CheckBoxContainer from '../components/checkBox';  // Corrected import
+import CheckBoxContainer from '../components/checkBox';
 
 export default function PageTwo({ navigation }) {
     return (

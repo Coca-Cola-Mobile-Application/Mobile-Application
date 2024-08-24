@@ -8,7 +8,7 @@ import InputComponent from "../components/textInput";
 import InputTitle from "../components/inpuTitle";
 import {sections} from "../data/formtopics";
 
-
+ 
 export default function PageOne({ navigation }) {
     return (
         <LinearGradient

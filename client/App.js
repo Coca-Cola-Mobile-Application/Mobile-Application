@@ -14,7 +14,7 @@ import PageTen from './screens/page_ten';
 import StackNavigator from './routes/stack';
 
 const Drawer = createDrawerNavigator();
-
+ 
 
 export default function App() {
   return (

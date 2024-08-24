@@ -26,9 +26,16 @@ export const topicDetails =[
     {
         number:'7',
         title:'HAZARDS IDENTIFIED'
+    },
+    {
+        number:'8',
+        title:"SPECIFY HAZARDS & CONTROL MEASURES"
+    },
+    {
+        number:'9',
+        title:"ISOLATION REQUIRED"
     }
 ]
-
 
 export const sections = [
     {

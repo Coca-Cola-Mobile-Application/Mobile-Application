@@ -35,8 +35,7 @@ export default function PageThree({navigation}) {
                       keyBoardType="default"
                   />
                 </Card>
-                <View style={globalStyles.insideBodyView}>
-                    <FlatList
+                <FlatList
                           data={isolationData}
                           scrollEnabled={false}
                           renderItem={({item})=>(
@@ -79,8 +78,7 @@ export default function PageThree({navigation}) {
                                 />
                             </Card>
                           )}
-                    />
-                </View>
+                />
               </View>
           </ScrollView>
         </View>

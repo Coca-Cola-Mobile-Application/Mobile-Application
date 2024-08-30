@@ -1,5 +1,6 @@
 import React from "react";
-import {StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { useState } from "react";
+import {StyleSheet, View, Text, TouchableOpacity ,Pressable} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { globalStyles } from "../styles/global";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
@@ -11,6 +12,21 @@ import { PPEdata } from "../data/formdata4";
 import CheckBoxContainer from '../components/checkBox'; 
 
 export default function PageFour({navigation}) {
+
+  const[listOpen,setListOpen]=useState({
+    first:false,
+    second:false,
+    third:false,
+    fourth:false,
+    fifth:false
+  });  
+
+  const listOpenHandler = (getUpdate) => {
+    setListOpen((prevState) => ({
+      ...prevState,
+      [getUpdate]: !prevState[getUpdate],
+    }));
+  };
 
   const subtopicname="Requested by issuer";
   return (
@@ -28,8 +44,10 @@ export default function PageFour({navigation}) {
               data={PPEdata}
               renderItem={({item}) => (
                 <Card>
-                  <SubTopic topicDetail={item.topic} />
-                  <FlatList
+                    <Pressable onPress={() => listOpenHandler(item.checkOpen)}>
+                        <SubTopic topicDetail={item.topic} />
+                    </Pressable>
+                  {listOpen[item.checkOpen] && (<FlatList
                     data={item.DropSelection}
                     renderItem={({ item }) => (
                       <CheckBoxContainer
@@ -37,7 +55,7 @@ export default function PageFour({navigation}) {
                       />
                     )}
                     scrollEnabled={false}
-                  />
+                  />)}
                 </Card>
               )}
               keyExtractor={(item, index) => index.toString()}

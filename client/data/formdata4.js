@@ -2,6 +2,7 @@ export const PPEdata =[
     { 
         id:"1",
         topic:"General",
+        checkOpen:"first",
         DropSelection:[
             {
                 key:"1",
@@ -36,6 +37,7 @@ export const PPEdata =[
     {
         id:"2",
         topic:"Hot work-Welding/Grinding/Chipping",
+        checkOpen:"second",
         DropSelection:[
             {
                 key:"1",
@@ -70,6 +72,7 @@ export const PPEdata =[
     {
         id:"3",
         topic:"Electrical work-Electrical panel/LT-HT installations",
+        checkOpen:"third",
         DropSelection:[
             {
                 key:"1",
@@ -100,6 +103,7 @@ export const PPEdata =[
     {
         id:"4",
         topic:"Work at Height > 1.8M Height",
+        checkOpen:"fourth",
         DropSelection:[
             {
                 key:"1",
@@ -134,6 +138,7 @@ export const PPEdata =[
     {
         id:"5",
         topic:"Confined Space",
+        checkOpen:"fifth",
         DropSelection:[
             {
                 key:"1",

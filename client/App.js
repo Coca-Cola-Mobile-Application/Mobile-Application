@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import splashScreen from './screens/splashScreen';
 import PageOne from './screens/page_one';
 import PageTwo from './screens/page_two';
 import PageThree from './screens/page_three';
@@ -12,6 +13,7 @@ import PageEight from './screens/page_eight';
 import PageNine from './screens/page_nine';
 import PageTen from './screens/page_ten';
 import StackNavigator from './routes/stack';
+import RegisterPage from './screens/RegisterPage';
 
 const Drawer = createDrawerNavigator();
  
@@ -33,6 +35,8 @@ export default function App() {
         headerShown:true
       }}
       >
+        <Drawer.Screen name="Splash" component={splashScreen} />
+        <Drawer.Screen name="Register" component={RegisterPage} />
         <Drawer.Screen name="Page One" component={PageOne} />
         <Drawer.Screen name="Page Two" component={PageTwo} />
         <Drawer.Screen name="Page Three" component={PageThree} />

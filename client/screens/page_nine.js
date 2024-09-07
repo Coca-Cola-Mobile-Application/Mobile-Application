@@ -14,6 +14,7 @@ export default function PageNine({ navigation }) {
         >
             <View style={globalStyles.insideContainer}></View>
         </LinearGradient>
+        
     );
 }
 

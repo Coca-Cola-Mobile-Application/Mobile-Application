@@ -34,6 +34,10 @@ export const topicDetails =[
     {
         number:'9',
         title:"ISOLATION REQUIRED"
+    },
+    {
+        number:'10',
+        title:"PPE TO BE USED  (TICK BELLOW AND RELEVANT PICTURE)"
     }
 ]
 

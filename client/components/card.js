@@ -14,7 +14,7 @@ export default function Card({children})
 
 const styles = StyleSheet.create({
     cardDecoration:{
-        width:'96%',
+        width:'97%',
         borderRadius:30,
         elevation:10,
         backgroundColor:'#fff',
@@ -25,5 +25,6 @@ const styles = StyleSheet.create({
         paddingHorizontal:15,
         paddingVertical:15,
         marginBottom:'15%',
+        alignSelf: 'center', 
     }
 });

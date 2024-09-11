@@ -6,8 +6,9 @@ const cors = require('cors');
 // Connect to MongoDB
 require("./db/db");
 
-// const RegisterRouter = require("./router/RegisterRouter/RegisterRouter");
-
+const RegisterRouter = require("./router/RegisterRouter/RegisterRouter");
+const LoginUserRouter = require("./router/LoginRouter/LoginUserRouter")
+ 
 const app = express();
 
 // Middleware setup
@@ -15,7 +16,8 @@ app.use(cors());
 app.use(bodyParser.json()); // To handle JSON request bodies
 
 // Routes
-// app.use("/api/v1/user", RegisterRouter);
+app.use("/api/v1/user", RegisterRouter);
+app.use("/api/v1/user", LoginUserRouter);
 
 // // Basic error handling
 // app.use((err, req, res, next) => {

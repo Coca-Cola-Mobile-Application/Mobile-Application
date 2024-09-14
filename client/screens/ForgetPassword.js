@@ -3,35 +3,33 @@ import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet, Alert, Image, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../styles/global";
 
-export default function LoginPage({navigation}) {
+export default function ForgetPassword({navigation}) {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = () => {
-    if (!name || !email || !password) {
-      Alert.alert('Error', 'Please fill all fields.');
-      return;
-    }
-    Alert.alert('Success', `Name: ${name}, Email: ${email}`);
+//     if (!name || !email || !password) {
+//       Alert.alert('Error', 'Please fill all fields.');
+//       return;
+//     }
+//     Alert.alert('Success', `Name: ${name}, Email: ${email}`);
+navigation.navigate('otp')
   };
 
-  const handleForgetNavigate = async()=>{
-    // console.log("Forget Password");
-    navigation.navigate("forgetPassword")
-  }
+
 
   return (
     <View style={styles.content}>
       {/* Top Section */}
       <View style={styles.header_container}>
-        <Text style={styles.header_text}>Welcome to the Coco-App</Text> 
-        <Text style={styles.header_subText}>Enter Your Login Credential</Text> 
+        <Text style={styles.header_text}>Welcome to the ForgetPassword</Text> 
+        <Text style={styles.header_subText}>Enter Your Email</Text> 
       </View>
 
       <View style={styles.logo_container}>
-        <Image source={require('../assets/image01.png')} style={styles.logo} />
+        <Image source={require('../assets/locked_1.png')} style={styles.logo} />
       </View>
 
       {/* Form Section */}
@@ -43,20 +41,8 @@ export default function LoginPage({navigation}) {
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
-        />
+        />    
 
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={true}
-        />       
-        
-         <TouchableOpacity style={styles.forget_button} onPress={handleForgetNavigate}>
-         <Text style={styles.Forget_pw}>Forget Password ? </Text>
-        </TouchableOpacity>
         {/* Custom Submit Button */}
         <TouchableOpacity style={styles.submit_button} onPress={handleSubmit}>
           <Text style={styles.submit_button_text}>Submit</Text>
@@ -99,12 +85,12 @@ const styles = StyleSheet.create({
   form_container: {
     width: '100%',
     padding: 20,
-    backgroundColor: '#fff',
+//     backgroundColor: '#fff',
     borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+//     shadowColor: '#000',
+//     shadowOffset: { width: 0, height: 2 },
+//     shadowOpacity: 0.2,
+//     shadowRadius: 3,
     elevation: 3,
     marginTop: 30,
   },

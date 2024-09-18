@@ -15,6 +15,8 @@ import PageTen from './screens/page_ten';
 import StackNavigator from './routes/stack';
 import RegisterPage from './screens/RegisterPage';
 import LoginPage from './screens/LoginPage';
+import ForgetPassword from './screens/ForgetPassword';
+import OTPPage from './screens/OTPPage';
 
 const Drawer = createDrawerNavigator();
  
@@ -39,6 +41,8 @@ export default function App() {
         <Drawer.Screen name="Splash" component={splashScreen} />
         <Drawer.Screen name="Register" component={RegisterPage} />
         <Drawer.Screen name="Login" component={LoginPage} />
+        <Drawer.Screen name="forgetPassword" component={ForgetPassword} />
+        <Drawer.Screen name="otp" component={OTPPage} />
         <Drawer.Screen name="Page One" component={PageOne} />
         <Drawer.Screen name="Page Two" component={PageTwo} />
         <Drawer.Screen name="Page Three" component={PageThree} />

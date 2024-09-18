@@ -17,6 +17,7 @@ import RegisterPage from './screens/RegisterPage';
 import LoginPage from './screens/LoginPage';
 import ForgetPassword from './screens/ForgetPassword';
 import OTPPage from './screens/OTPPage';
+import ResetPasswordScreen from './screens/ResetPasswordScreen';
 
 const Drawer = createDrawerNavigator();
  
@@ -43,6 +44,7 @@ export default function App() {
         <Drawer.Screen name="Login" component={LoginPage} />
         <Drawer.Screen name="forgetPassword" component={ForgetPassword} />
         <Drawer.Screen name="otp" component={OTPPage} />
+        <Drawer.Screen name="reset" component={ResetPasswordScreen} />
         <Drawer.Screen name="Page One" component={PageOne} />
         <Drawer.Screen name="Page Two" component={PageTwo} />
         <Drawer.Screen name="Page Three" component={PageThree} />

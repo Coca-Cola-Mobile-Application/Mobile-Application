@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 // Post request to register a new user
-router.post("/login",authMiddleware,LoginController)
+router.post("/login",LoginController)
 
 
 

@@ -35,7 +35,7 @@ const LoginController = async (req, res) => {
                   message: "Login Success",
                   success: true,
                   token,
-                  user
+                  data:user
       
           });
       

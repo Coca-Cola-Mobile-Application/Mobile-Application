@@ -1,22 +1,36 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet, Alert, Image, TouchableOpacity } from 'react-native';
+import axios from 'axios'
 
 export default function RegisterPage({ navigation }) {  // Accept navigation as a prop
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     if (!name || !email || !password) {
-      Alert.alert('Error', 'Please fill all fields.');
       return;
     }
-    Alert.alert('Success', `Name: ${name}, Email: ${email}`);
+    console.log(name , email , password);
+    try {
+      const registerResponse = await axios.post("http://localhost:8080/api/v1/user/register",{username:name , email:email , password:password});
+      // console.log(registerResponse);
+      if (registerResponse.data.success) {
+        alert(registerResponse.data.message);
+        navigation.navigate('Login');  // Navigate to the "Login" screen
+      }else{
+        alert(registerResponse.data.message);
+      }
+      
+    } catch (error) {
+      alert(error)
+    }
   };
 
-  const handleNavigate = () => {
+  const handleNavigate = async() => {
     navigation.navigate('Login');  // Navigate to the "Login" screen
+    
   };
 
   return (
@@ -38,7 +52,7 @@ export default function RegisterPage({ navigation }) {  // Accept navigation as 
           style={styles.input}
           placeholder="Enter your name"
           value={name}
-          onChangeText={setName}
+          onChangeText={(text)=>setName(text)}
         />
 
         <Text style={styles.label}>Email</Text>

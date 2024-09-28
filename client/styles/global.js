@@ -36,5 +36,5 @@ export const globalStyles = StyleSheet.create({
     },
     imageSectionP:{
         position: 'absolute',
-    } 
+    },
 });

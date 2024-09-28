@@ -9,7 +9,7 @@ const workPermitSchema = new mongoose.Schema({
   permitName: {
     type: String,
     required: true
-  },
+  }, 
   issuerObjectId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true

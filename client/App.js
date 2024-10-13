@@ -35,6 +35,8 @@ import AcceptPermitListStack from './routes/acceptPermitListStack';
 import SplashScreen from './screens/splashScreen';
 import RegisterPage from './screens/RegisterPage';
 import LoginPage from './screens/LoginPage';
+import ForgetPassword from './screens/ForgetPassword';
+import ResetPasswordScreen from './screens/ResetPasswordScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -59,9 +61,9 @@ export default function App() {
          <Stack.Screen name='splash' component={SplashScreen} />
          <Stack.Screen name='Register' component={RegisterPage} />
          <Stack.Screen name='Login' component={LoginPage} />
-         <Stack.Screen name='forgetPassword' component={SplashScreen} />
+         <Stack.Screen name='forgetPassword' component={ForgetPassword} />
          <Stack.Screen name='otp' component={SplashScreen} />
-         <Stack.Screen name='reset' component={SplashScreen} />
+         <Stack.Screen name='reset' component={ResetPasswordScreen} />
           <Stack.Screen name="HomePage" component={HomePage}/>
           <Stack.Screen name="Create Work Permit" component={WorkPermitStack} options={{ headerShown: false }}/>
           <Stack.Screen name="FillTypes" component={FillPermitStack} options={{ headerShown: false }}/>

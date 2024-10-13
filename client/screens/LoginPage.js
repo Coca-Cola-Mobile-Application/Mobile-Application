@@ -2,20 +2,37 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet, Alert, Image, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../styles/global";
+import axios from 'axios';
 
-export default function LoginPage() {
+export default function LoginPage({navigation}) {
 
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = () => {
-    if (!name || !email || !password) {
-      Alert.alert('Error', 'Please fill all fields.');
-      return;
-    }
-    Alert.alert('Success', `Name: ${name}, Email: ${email}`);
+  const handleSubmit = async() => {
+     try {
+      if (!email || !password) {
+        alert('Please fill all fields.');
+        return;
+      }
+      console.log(email, password);
+      const loginResponse = await axios.post("http://localhost:8080/api/v1/user/login",{ email, password });
+
+       if(loginResponse.data.success){
+        localStorage.setItem("token", loginResponse.data.data.token);
+         alert(loginResponse.data.message)
+         navigation.navigate("Page One")
+       }
+     } catch (error) {
+       alert(error)
+     }
+    
   };
+
+  const handleForgetNavigate = async()=>{
+    // console.log("Forget Password");
+    navigation.navigate("forgetPassword")
+  }
 
   return (
     <View style={styles.content}>
@@ -47,7 +64,11 @@ export default function LoginPage() {
           value={password}
           onChangeText={setPassword}
           secureTextEntry={true}
-        />        
+        />       
+        
+         <TouchableOpacity style={styles.forget_button} onPress={handleForgetNavigate}>
+         <Text style={styles.Forget_pw}>Forget Password ? </Text>
+        </TouchableOpacity>
         {/* Custom Submit Button */}
         <TouchableOpacity style={styles.submit_button} onPress={handleSubmit}>
           <Text style={styles.submit_button_text}>Submit</Text>
@@ -130,6 +151,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+
+  Forget_pw:{
+    color: '#000',  // Blue text
+    fontSize: 12,
+    textAlign: 'right',
+  }
 
 
 });

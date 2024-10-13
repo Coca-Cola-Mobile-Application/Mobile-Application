@@ -32,6 +32,9 @@ import HomePage from '../client/screens/Home';
 import WorkPermitStack from './routes/createNewPermitStack';
 import FillPermitStack from './routes/fillPermitsStack';
 import AcceptPermitListStack from './routes/acceptPermitListStack';
+import SplashScreen from './screens/splashScreen';
+import RegisterPage from './screens/RegisterPage';
+import LoginPage from './screens/LoginPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,7 +42,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-          initialRouteName="HomePage" // Ensure this matches one of your screen names
+          initialRouteName="splash" // Ensure this matches one of your screen names
           screenOptions={{
             headerStyle: {
               backgroundColor: '#008000',
@@ -52,6 +55,13 @@ export default function App() {
             headerShown: true,
           }}
       >
+
+         <Stack.Screen name='splash' component={SplashScreen} />
+         <Stack.Screen name='Register' component={RegisterPage} />
+         <Stack.Screen name='Login' component={LoginPage} />
+         <Stack.Screen name='forgetPassword' component={SplashScreen} />
+         <Stack.Screen name='otp' component={SplashScreen} />
+         <Stack.Screen name='reset' component={SplashScreen} />
           <Stack.Screen name="HomePage" component={HomePage}/>
           <Stack.Screen name="Create Work Permit" component={WorkPermitStack} options={{ headerShown: false }}/>
           <Stack.Screen name="FillTypes" component={FillPermitStack} options={{ headerShown: false }}/>
@@ -61,3 +71,11 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+
+{/* <Drawer.Screen name="Splash" component={splashScreen} />
+        <Drawer.Screen name="Register" component={RegisterPage} />
+        <Drawer.Screen name="Login" component={LoginPage} />
+        <Drawer.Screen name="forgetPassword" component={ForgetPassword} />
+        <Drawer.Screen name="otp" component={OTPPage} />
+        <Drawer.Screen name="reset" component={ResetPasswordScreen} /> */}

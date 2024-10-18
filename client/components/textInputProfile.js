@@ -1,38 +1,55 @@
-import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Text, Pressable } from "react-native";
+import React from "react";
+import { View, StyleSheet, TextInput, Text } from "react-native";
 
 export default function TextInputProfile({
   children,
-  pickerDisplay,
   editable,
   keyBoardType,
   placeHolder,
-  mode,
+  type,
+  value,
+  onChangeText,
 }) {
-  const [show, setShow] = useState(false);
-  const [dpDate, setdpDate] = useState('');
+  // Ensure the value is a string for TextInput and handle undefined/null values
+  const displayValue = value !== undefined && value !== null ? String(value) : "";
 
-  const pickerHandler = () => {
-    setShow(!show);
+  // Convert input back to a number when it's a numeric field
+  const handleChange = (text) => {
+    if (type === "numeric") {
+      const numericValue = parseInt(text, 10); // Convert the input to an integer
+      onChangeText(isNaN(numericValue) ? "" : numericValue); // Update the value if valid number, else empty
+    } else {
+      onChangeText(text); // For non-numeric fields, pass the text as it is
+    }
   };
 
   return (
     <View style={styles.cardDecoration}>
       {children}
 
-      {!show && (
-        <Pressable onPress={pickerHandler} style={styles.inputWrapper}>
-          <Text style={styles.fixedText}>{placeHolder}</Text>
-          <TextInput
-            style={[styles.subStyle, { paddingLeft: placeHolder.length * 8 }]} // Adjust padding based on placeholder length
-            editable={editable}
-            keyboardType={keyBoardType}
-            multiline={true}
-            value={dpDate}
-            onChangeText={setdpDate}
-          />
-        </Pressable>
-      )}
+      <View
+        pointerEvents={editable ? "auto" : "none"} // Disable interaction when not editable
+        style={styles.inputWrapper}
+      >
+        <Text style={styles.fixedText}>{placeHolder}</Text>
+        <TextInput
+          style={styles.inputField}
+          editable={editable}
+          keyboardType={
+            type === "numeric"
+              ? "numeric"
+              : type === "email"
+              ? "email-address"
+              : "default"
+          } // Conditionally set keyboard type
+          secureTextEntry={type === "password"} // Enable secure text entry for password
+          multiline={type === "textarea"} // Enable multiline for text areas
+          value={displayValue} // Ensure the value is always a string
+          onChangeText={handleChange} // Handle numeric conversion
+          placeholder={editable ? "" : placeHolder} // Hide placeholder in non-editable state
+          placeholderTextColor="#999999"
+        />
+      </View>
     </View>
   );
 }
@@ -45,29 +62,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     marginBottom: "10%",
-    alignSelf: 'center', 
-    
+    alignSelf: "center",
   },
 
   inputWrapper: {
     flexDirection: "row",
     alignItems: "center",
+    position: "relative",
   },
 
   fixedText: {
-    position: "absolute",
-    left: 0,
+    width: 100, // Fixed width for placeholder
     fontWeight: "bold",
-    color: "#000000",
+    color: "#666666",
   },
 
-  subStyle: {
-    backgroundColor: "rgba(232, 232, 232, 0)", // Making background transparent
-    width: "100%",
-    overflow: "hidden",
+  inputField: {
+    flex: 1, // Input field takes up the remaining space
+    backgroundColor: "transparent", // Transparent background for input
     borderRadius: 10,
     fontWeight: "bold",
     color: "#000000",
-    paddingLeft: 100, // initial padding
+    paddingLeft: 5, // Space between placeholder and input
   },
 });

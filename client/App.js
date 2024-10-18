@@ -12,7 +12,10 @@ import PageEight from './screens/page_eight';
 import PageNine from './screens/page_nine';
 import PageTen from './screens/page_ten';
 import PageEleven from './screens/page_eleven';
-import StackNavigator from './routes/stack';
+import PageTwelve from './screens/page_twelve';
+import PageThirteen from './screens/page_thirteen';
+import PageFourteen from './screens/page_fourteen';
+import {PageTenStack} from './routes/stack';
 
 const Drawer = createDrawerNavigator();
  
@@ -43,8 +46,11 @@ export default function App() {
         <Drawer.Screen name="Page Seven" component={PageSeven} />
         <Drawer.Screen name="Page Eight" component={PageEight} />
         <Drawer.Screen name="Page Nine" component={PageNine} />
-        <Drawer.Screen name="Page Ten" component={PageTen} />
+        <Drawer.Screen name="Page Ten" component={PageTenStack} />
         <Drawer.Screen name="Page Eleven" component={PageEleven} />
+        <Drawer.Screen name="Page Twelve" component={PageTwelve} />
+        <Drawer.Screen name="Page Thirteen" component={PageThirteen} />
+        <Drawer.Screen name="Page Fourteen" component={PageFourteen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

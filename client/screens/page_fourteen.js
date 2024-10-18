@@ -13,12 +13,8 @@ import Topic from "../components/topic";
 import CustomButton from "../components/button";
 import axios from "axios";
 
-export default function PageEleven({ navigation }) {
+export default function PageFourteen({ navigation }) {
   const BASE_URL = "http://10.0.2.2:3001"; //url of the mock json server
-
-  const [isEditablePosition, setIsEditablePosition] = useState(false); // Flag to control edit mode
-  const [isEditableBasic, setIsEditableBasic] = useState(false); // Flag to control edit mode
-  const [isEditableSecondary, setIsEditableSecondary] = useState(false); // Flag to control edit mode
 
   const [position, setPosition] = useState("Height Management Position");
   const [department, setDepartment] = useState("Height Management Department");
@@ -33,12 +29,12 @@ export default function PageEleven({ navigation }) {
   const [addressLine02, setAddressLine02] = useState("Galle Road");
   const [city, setCity] = useState("Colombo");
   const [district, setDistrict] = useState("Colombo");
-  const [height, setHeight] = useState(0);
-  const [weight, setWeight] = useState(0);
+  const [height, setHeight] = useState("5.8");
+  const [weight, setWeight] = useState("70");
 
   const [mobile, setMobile] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("xyz@gmail.com");
+  const [password, setPassword] = useState("password");
 
   const [isAccepted, setIsAccepted] = useState(false);
 
@@ -60,13 +56,12 @@ export default function PageEleven({ navigation }) {
         setAddressLine02(data.addressLine02);
         setCity(data.city);
         setDistrict(data.district);
-        setHeight(parseInt(data.height, 10));  // Convert to integer
-        setWeight(parseInt(data.weight, 10));  // Convert to integer
+        setHeight(parseInt(data.height, 10)); // Convert to integer
+        setWeight(parseInt(data.weight, 10)); // Convert to integer
         setMobile(data.mobile);
         setEmail(data.email);
         setPassword(data.password);
         setIsAccepted(data.isAccepted);
-        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -75,26 +70,10 @@ export default function PageEleven({ navigation }) {
     fetchData();
   }, []);
 
-  //to handle the edit button click
-  const toggleEditable = (section) => {
-    switch (section) {
-      case "position":
-        setIsEditablePosition(!isEditablePosition);
-        break;
-      case "basic":
-        setIsEditableBasic(!isEditableBasic);
-        break;
-      case "secondary":
-        setIsEditableSecondary(!isEditableSecondary);
-        break;
-      default:
-        break;
-    }
-  };
-
-  //to handle the save button click
-  const handleEdit = async () => {
+  //handle accept button
+  const handleAccept = async () => {
     try {
+      setIsAccepted(true);
       const response = await axios.put(`${BASE_URL}/user/3`, {
         position: position,
         department: department,
@@ -112,21 +91,49 @@ export default function PageEleven({ navigation }) {
         mobile: mobile,
         email: email,
         password: password,
-        isAccepted: isAccepted
+        isAccepted: isAccepted,
       });
 
-      setIsEditablePosition(false);
-      setIsEditableBasic(false);
-      setIsEditableSecondary(false);
-
-      console.log("Data updated successfully", response.data);
+      if (response.status === 200) {
+        alert("Accepted successfully");
+      }
+    } catch (error) {
+      console.error("Error accepting data:", error);
     }
-    catch (error) {
-      console.error("Error updating data:", error);
-    }
-  }
-  
+  };
 
+  //handle reject button
+  const handleReject = async () => {
+    try {
+      const response = await axios.delete(`${BASE_URL}/user/3`);
+
+      if (response.status === 200) {
+        alert("Rejected successfully");
+      }
+
+      const responsePost = await axios.post(`${BASE_URL}/deleted_user`, {
+        position: position,
+        department: department,
+        firstName: firstName,
+        lastName: lastName,
+        nic: nic,
+        dob: dob,
+        gender: gender,
+        addressLine01: addressLine01,
+        addressLine02: addressLine02,
+        city: city,
+        district: district,
+        height: height,
+        weight: weight,
+        mobile: mobile,
+        email: email,
+        password: password,
+        isAccepted: isAccepted,
+      });
+    } catch (error) {
+      console.error("Error rejecting data:", error);
+    }
+  };
 
   return (
     <LinearGradient
@@ -146,26 +153,21 @@ export default function PageEleven({ navigation }) {
             }}
           >
             <InputTitle>Position Information</InputTitle>
-            <TouchableOpacity onPress={() => toggleEditable("position")}>
-              <Icon name="pencil" size={20} color="#000000" />
-            </TouchableOpacity>
           </View>
 
           <Card>
             <TextInputProfile
               placeHolder="Position :"
-              editable={isEditablePosition}
+              editable={false}
               keyBoardType="default"
               value={position}
-              onChangeText={(value) => setPosition(value)}
             />
 
             <TextInputProfile
               placeHolder="Department :"
-              editable={isEditablePosition}
+              editable={false}
               keyBoardType="default"
               value={department}
-              onChangeText={(value) => setDepartment(value)}
             />
           </Card>
 
@@ -178,46 +180,38 @@ export default function PageEleven({ navigation }) {
             }}
           >
             <InputTitle>Basic Information</InputTitle>
-            <TouchableOpacity onPress={() => toggleEditable("basic")}>
-              <Icon name="pencil" size={20} color="#000000" />
-            </TouchableOpacity>
           </View>
 
           <Card>
             <TextInputProfile
               placeHolder="First Name :"
-              editable={isEditableBasic}
+              editable={false}
               keyBoardType="default"
               value={firstName}
-              onChangeText={(value) => setFirstName(value)}
             />
             <TextInputProfile
               placeHolder="Last Name :"
-              editable={isEditableBasic}
+              editable={false}
               keyBoardType="default"
               value={lastName}
-              onChangeText={(value) => setLastName(value)}
             />
             <TextInputProfile
               placeHolder="NIC :"
-              editable={isEditableBasic}
+              editable={false}
               keyBoardType="default"
               value={nic}
-              onChangeText={(value) => setNic(value)}
             />
             <TextInputProfile
               placeHolder="Date of Birth :"
-              editable={isEditableBasic}
+              editable={false}
               keyBoardType="default"
               value={dob}
-              onChangeText={(value) => setDob(value)}
             />
             <TextInputProfile
               placeHolder="Gender :"
-              editable={isEditableBasic}
+              editable={false}
               keyBoardType="default"
               value={gender}
-              onChangeText={(value) => setGender(value)}
             />
           </Card>
 
@@ -230,61 +224,101 @@ export default function PageEleven({ navigation }) {
             }}
           >
             <InputTitle>Secondary Information</InputTitle>
-            <TouchableOpacity onPress={() => toggleEditable("secondary")}>
-              <Icon name="pencil" size={20} color="#000000" />
-            </TouchableOpacity>
           </View>
 
           <Card>
             <TextInputProfile
               placeHolder="Address Line 01 :"
-              editable={isEditableSecondary}
+              editable={false}
               keyBoardType="default"
               value={addressLine01}
-              onChangeText={(value) => setAddressLine01(value)}
             />
             <TextInputProfile
               placeHolder="Address Line 02 :"
-              editable={isEditableSecondary}
+              editable={false}
               keyBoardType="default"
               value={addressLine02}
-              onChangeText={(value) => setAddressLine02(value)}
             />
             <TextInputProfile
               placeHolder="City :"
-              editable={isEditableSecondary}
+              editable={false}
               keyBoardType="default"
               value={city}
-              onChangeText={(value) => setCity(value)}
             />
             <TextInputProfile
               placeHolder="District :"
-              editable={isEditableSecondary}
+              editable={false}
               keyBoardType="default"
               value={district}
-              onChangeText={(value) => setDistrict(value)}
             />
             <TextInputProfile
               placeHolder="Height :"
-              editable={isEditableSecondary}
-              keyBoardType="numeric"
+              editable={false}
+              keyBoardType="default"
               value={height}
-              onChangeText={(value) => setHeight(value)}
             />
             <TextInputProfile
               placeHolder="Weight :"
-              editable={isEditableSecondary}
-              keyBoardType="numeric"
+              editable={false}
+              keyBoardType="default"
               value={weight}
-              onChangeText={(value) => setWeight(value)}
             />
           </Card>
 
-          <View style={{ alignItems: "center" }}>
+          {/* Adding edit button next to Secondary Information */}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <InputTitle>Security Information</InputTitle>
+          </View>
+          <Card>
+            <TextInputProfile
+              placeHolder="Telephone Number :"
+              editable={false}
+              keyBoardType="default"
+              value={mobile}
+            />
+
+            <TextInputProfile
+              placeHolder="Email Address :"
+              editable={false}
+              keyBoardType="default"
+              value={email}
+            />
+
+            <TextInputProfile
+              placeHolder="Password :"
+              editable={false}
+              keyBoardType="default"
+              type="password"
+              value={password}
+            />
+          </Card>
+
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginBottom: 20,
+            }}
+          >
             <CustomButton
-              title="Save"
-              buttonStyle={{ width: 150, marginBottom: 20 }} // Add this style to reduce the width of the button
-              onPress={() => {handleEdit()}}
+              title="Reject"
+              buttonStyle={{ width: 100, backgroundColor: "#ff0000" }}
+              onPress={() => {
+                handleReject();
+              }}
+            />
+            <CustomButton
+              title="Accept"
+              buttonStyle={{ width: 100, backgroundColor: "#28a745" }}
+              onPress={() => {
+                handleAccept();
+              }}
             />
           </View>
         </ScrollView>

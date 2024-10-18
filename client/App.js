@@ -38,6 +38,7 @@ import LoginPage from './screens/LoginPage';
 import ForgetPassword from './screens/ForgetPassword';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import AdminSummery from './screens/adminSummery';
+import Dashboard from './screens/dashboad';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,7 +46,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-          initialRouteName="analyze" // Ensure this matches one of your screen names
+          initialRouteName="dashboard" // Ensure this matches one of your screen names
           screenOptions={{
             headerStyle: {
               backgroundColor: '#008000',
@@ -70,8 +71,8 @@ export default function App() {
           <Stack.Screen name="FillTypes" component={FillPermitStack} options={{ headerShown: false }}/>
           <Stack.Screen name="AcceptPermitList" component={AcceptPermitListStack}  options={{ headerShown: false }}/>
           <Stack.Screen name="My Profile" component={MyProfile} />
-
-          <Stack.Screen name="analyze" component={AdminSummery} />
+          {/* <Stack.Screen name="Analyze" component={AdminSummery} /> */}
+          <Stack.Screen name="dashboard" component={Dashboard} options={{ headerShown: false }} />
 
       </Stack.Navigator>
     </NavigationContainer>

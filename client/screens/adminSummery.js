@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions, StyleSheet, Text } from 'react-native';
+import { TouchableOpacity, View, Dimensions, StyleSheet, Text } from 'react-native';
 import {
   BarChart,
   PieChart, // Imported PieChart from 'react-native-chart-kit'
@@ -11,15 +11,15 @@ const screenWidth = Dimensions.get("window").width;
 
 // Define the chart style
 const graphStyle = {
-  marginVertical: 8,
-  borderRadius: 16
+  // marginVertical: 8,
+  borderRadius: 0,
 };
 
 // Define the chart configuration
 const chartConfig = {
-  backgroundGradientFrom: "#1E2923",
-  backgroundGradientTo: "#08130D",
-  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+  backgroundGradientFrom: "#60100B",
+  backgroundGradientTo: "#60100B",
+  color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
   labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
   strokeWidth: 2, // optional, default 3
   barPercentage: 0.5,
@@ -60,6 +60,16 @@ function AdminSummary() {
     }
   ];
 
+  const handleBarPress = (value, label) => {
+    console.log('Clicked value:', value, 'Label:', label);
+    alert(`You clicked ${label}: ${value}`);
+  };
+
+  const handlePieSlicePress = (value, label) => {
+    console.log('Clicked value:', value, 'Label:', label);
+    alert(`You clicked ${label}: ${value}`);
+  };
+
   return (
     <View style={styles.container}>
       {/* Replaced <h2> with <Text> */}
@@ -71,11 +81,36 @@ function AdminSummary() {
         <BarChart
           style={graphStyle}
           data={data}
-          width={screenWidth - 5}
-          height={380} // Fixed height for the chart
+          width={screenWidth}
+          height={380}
           chartConfig={chartConfig}
-          verticalLabelRotation={30} // Rotate the labels on the X axis
+          verticalLabelRotation={30}
         />
+
+        {/* Overlaying TouchableOpacities on each bar */}
+        <View
+          style={{
+            position: 'absolute',
+            top: 0,
+            width: screenWidth,
+            height: 380,
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}
+        >
+          {data.datasets[0].data.map((value, index) => (
+            <TouchableOpacity
+              key={index}
+              style={{ width: screenWidth / data.labels.length, height: '100%' }}
+              onPress={() => handleBarPress(value, data.labels[index])}
+            >
+              {/* <Text style={{ textAlign: 'center', marginTop: 360 }}>
+              {data.labels[index]}
+            </Text> */}
+            </TouchableOpacity>
+          ))}
+        </View>
+
       </View>
       <View style={styles.pieChartSection}>
         <PieChart
@@ -83,12 +118,32 @@ function AdminSummary() {
           width={screenWidth - 40}
           height={220}
           chartConfig={chartConfig}
-          accessor={"population"}
-          backgroundColor={"transparent"}
-          paddingLeft={"15"}
+          accessor={'population'}
+          backgroundColor={'transparent'}
+          paddingLeft={'15'}
           center={[10, 0]} // Adjusted center alignment
           absolute
         />
+
+        {/* Overlaying TouchableOpacities on each slice */}
+        <View
+          style={{
+            position: 'absolute',
+            top: 0,
+            width: screenWidth - 40,
+            height: 220,
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}
+        >
+          {dataPie.map((slice, index) => (
+            <TouchableOpacity
+              key={index}
+              style={{ width: (screenWidth - 40) / dataPie.length, height: '100%' }}
+              onPress={() => handlePieSlicePress(slice.population, slice.name)}
+            />
+          ))}
+        </View>
       </View>
     </View>
   );
@@ -98,10 +153,10 @@ function AdminSummary() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#60100B",
     justifyContent: "center",
   },
-  
+
   barGraphSection: {
     alignItems: "center",
     marginBottom: 20, // Added margin between charts
@@ -117,8 +172,8 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     alignItems: 'center', // Center the title
     // backgroundColor:"red",
-    marginTop:-20,
-    height:100,
+    marginTop: -30,
+    height: 100,
   },
 
   title_head: {
@@ -126,11 +181,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: "600",
     fontFamily: "Roboto, sans-serif",  // updated to a professional font
-    marginTop: 20,
+    marginTop: 10,
     paddingTop: 20,
-    color:"grey",
-    textDecorationLine:"underline"
-}
+    color: "#E3242B",
+    // textDecorationLine:"underline"
+  }
 
 });
 

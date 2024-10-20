@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 
 export default function Dashboard() {
   return (
-      <Tab.Navigator initialRouteName="Analyze">
+      <Tab.Navigator initialRouteName="allPermit">
         <Tab.Screen
           name="Analyze"
           component={AdminSummary}

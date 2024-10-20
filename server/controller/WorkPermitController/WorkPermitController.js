@@ -1,26 +1,40 @@
 const WorkPermitModel = require("../../model/WorkPermitModel/WorkPermitModel");
+const UserModel = require("../../model/UserModel/userModel");
 const mongoose = require("mongoose");
 
 // Handle the work permit creation
 const WorkPermitCreate = async (req, res) => {
   try {
+    const issuerId = req.body.issuerObjectId;
+    const user = await UserModel.findById(issuerId);
+
+    // if (!user) {
+    //   console.log(user);
+    //   return res.status(404).send({
+    //     success: false,
+    //     message: "Issuer not found"
+    //   });
+    // }
+    
     // Create a new work permit document based on the request body
     const newWorkPermit = new WorkPermitModel({
       permitName: req.body.permitName,
-      issuerObjectId: mongoose.Types.ObjectId(req.body.issuerObjectId), 
-      fillPermissionID: mongoose.Types.ObjectId(req.body.fillPermissionID),
-      acceptPermissionIDs: req.body.acceptPermissionIDs.map(id => mongoose.Types.ObjectId(id)),
+      issuerObjectId: new mongoose.Types.ObjectId(issuerId),
+      fillPermissionID:new mongoose.Types.ObjectId(req.body.fillPermissionID),
+      acceptPermissionIDs: req.body.acceptPermissionIDs.map(id => new mongoose.Types.ObjectId(id)),
       fillCompletedSubmission: req.body.fillCompletedSubmission || false,
-      p1IsuNme: req.body.p1IsuNme,
-      p1IsuDepNme: req.body.p1IsuDepNme,
+      //p1IsuNme: user.username || 'Isura Perera',
+      p1IsuNme:'Isura Perera', 
+      //p1IsuDepNme: user.department || 'manufacturing', 
+      p1IsuDepNme:'manufacturing', 
       p1TStart: req.body.p1TStart || '',
       p1TEnd: req.body.p1TEnd || '',
-      p1ContractorNme: req.body.p1ContractorNme,
-      p1ContractorComNme: req.body.p1ContractorComNme,
-      p1JobLoca: req.body.p1JobLoca,
-      p1JobDes: req.body.p1JobDes,
-      DepOrSection: req.body.DepOrSection,
-      p1CrosRef: req.body.p1CrosRef,
+      p1ContractorNme: req.body.p1ContractorNme || '',
+      p1ContractorComNme: req.body.p1ContractorComNme || '',
+      p1JobLoca: req.body.p1JobLoca || '',
+      p1JobDes: req.body.p1JobDes || '',
+      DepOrSection: req.body.DepOrSection || '',
+      p1CrosRef: req.body.p1CrosRef || '',
       p2HazardsIdentified: req.body.p2HazardsIdentified || [],
       p3DriveOrPanelInvolved: req.body.p3DriveOrPanelInvolved || '',
       p3motorIsolation: req.body.p3motorIsolation || [],
@@ -63,7 +77,7 @@ const WorkPermitCreate = async (req, res) => {
       p8PermitClosedResponsibleID: req.body.p8PermitClosedResponsibleID || null,
       p8permitclosedTime: req.body.p8permitclosedTime || ''
     });
-
+ 
     // Save the new work permit in the database
     await newWorkPermit.save();
 
@@ -84,3 +98,4 @@ const WorkPermitCreate = async (req, res) => {
 };
 
 module.exports = { WorkPermitCreate };
+

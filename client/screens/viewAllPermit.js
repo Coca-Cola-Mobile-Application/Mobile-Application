@@ -1,9 +1,29 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import {ScrollView, View, TextInput, Button, StyleSheet,Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // Import icons from react-native-vector-icons
 
-export default function viewAllPermit() {
+export default function viewAllPermit({ navigation }) {
   const [searchText, setSearchText] = useState('');
+
+  
+  const data = [
+    { id: 1, date: '2022-01-01', status: 'Approved' },
+    { id: 2, date: '2022-01-02', status: 'Pending' },
+    { id: 3, date: '2022-01-03', status: 'Rejected' },
+    { id: 4, date: '2022-01-03', status: 'Rejected' },
+    { id: 5, date: '2022-01-03', status: 'Rejected' },
+    { id: 6, date: '2022-01-03', status: 'Rejected' },
+    { id: 7, date: '2022-01-03', status: 'Rejected' },
+    { id: 8, date: '2022-01-03', status: 'Rejected' },
+    { id: 9, date: '2022-01-03', status: 'Rejected' },
+    { id: 10, date: '2022-01-03', status: 'Rejected' },
+    { id: 11, date: '2022-01-03', status: 'Rejected' },
+    { id: 12, date: '2022-01-03', status: 'Rejected' },
+    { id: 11, date: '2022-01-03', status: 'Rejected' },
+    { id: 12, date: '2022-01-03', status: 'Rejected' },
+    // Add more data as needed
+
+  ]
 
   const handleSearch = () => {
     // Perform search action with the current searchText
@@ -11,9 +31,20 @@ export default function viewAllPermit() {
     alert(searchText)
   };
 
+  const handleNavigateIndividualPermit = async(id)=>{
+    try {
+      alert(id)
+      navigation.navigate('PermitView', { id: id})
+      console.log(id);
+    
+    } catch (error) {
+       alert(error)
+    }
+  }
 
   return (
-    <View style={styles.main_section}>
+    <ScrollView style={styles.main_section}>
+      <p style={styles.permit_list_p}>All Permit List</p>
       <View style={styles.search_section}>
       <TextInput
         style={styles.search_box}
@@ -24,8 +55,16 @@ export default function viewAllPermit() {
       <Icon name="search" size={30} style={styles.search_icon} onPress={handleSearch} />
     </View>
      
+     <View style={styles.permit_list}>
+       {data.map((item, index) =>(
+        <View style={styles.permit_list_card}>
+        <Text>{item.date}</Text>
+        <Icon name="arrow-right" size={30} style={styles.icon} onPress={()=>handleNavigateIndividualPermit(item.id)} />
+        </View>
+       ))}
+     </View>
 
-    </View>
+    </ScrollView>
   )
 }
 
@@ -49,7 +88,7 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderWidth: 0.5,
     paddingHorizontal: 10,
-    marginRight: 10,  
+    marginLeft: 10,  
     borderRadius:10,
     width:120
   },
@@ -58,5 +97,32 @@ const styles = StyleSheet.create({
     marginLeft:-50,
     width:60,
     cursor:"pointer"
-  }
+  },
+  permit_list:{
+     marginTop:30,
+  },
+  permit_list_p:{
+    // backgroundColor:"#000"
+    color:"#000",
+    textAlign:"center",
+    fontSize:30,
+    fontWeight:"bold",
+    marginTop:20,
+    fontFamily: "Roboto, sans-serif",  // updated to a professional font
+  },
+  permit_list_card: {
+    flexDirection: 'row',  // Ensures Text and Icon are in a row
+    alignItems: 'center',  // Vertically centers the Text and Icon
+    justifyContent: 'space-between',  // Places Text on the left and Icon on the right
+    padding: 10,
+    borderWidth:0,
+    borderColor: '#fff',  // Optional: Add border styling for the card
+    backgroundColor:"#E8E8E8",
+    borderRadius:10,
+    marginBottom:15,
+  },
+  icon: {
+    color: '#000',  // Optional: Customize the icon color
+    cursor:"pointer"
+  },
 })

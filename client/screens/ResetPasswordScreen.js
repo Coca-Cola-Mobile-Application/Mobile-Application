@@ -2,31 +2,19 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet, Alert, Image, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../styles/global";
-import axios from 'axios';
 
-export default function LoginPage({navigation}) {
+export default function ResetPasswordScreen({navigation}) {
 
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = async() => {
-     try {
-      if (!email || !password) {
-        alert('Please fill all fields.');
-        return;
-      }
-      console.log(email, password);
-      const loginResponse = await axios.post("http://localhost:8080/api/v1/user/login",{ email, password });
-
-       if(loginResponse.data.success){
-        localStorage.setItem("token", loginResponse.data.data.token);
-         alert(loginResponse.data.message)
-         navigation.navigate("Page One")
-       }
-     } catch (error) {
-       alert(error)
-     }
-    
+  const handleSubmit = () => {
+    if (!name || !email || !password) {
+      Alert.alert('Error', 'Please fill all fields.');
+      return;
+    }
+    Alert.alert('Success', `Name: ${name}, Pw: ${newPassword}`);
   };
 
   const handleForgetNavigate = async()=>{
@@ -38,8 +26,8 @@ export default function LoginPage({navigation}) {
     <View style={styles.content}>
       {/* Top Section */}
       <View style={styles.header_container}>
-        <Text style={styles.header_text}>Welcome to the Coco-App</Text> 
-        <Text style={styles.header_subText}>Enter Your Login Credential</Text> 
+        <Text style={styles.header_text}>Reset Password Page</Text> 
+        <Text style={styles.header_subText}>Enter Your New Password</Text> 
       </View>
 
       <View style={styles.logo_container}>
@@ -48,27 +36,23 @@ export default function LoginPage({navigation}) {
 
       {/* Form Section */}
       <View style={styles.form_container}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-        />
-
-        <Text style={styles.label}>Password</Text>
+        <Text style={styles.label}>New Password</Text>
         <TextInput
           style={styles.input}
           placeholder="Enter your password"
+          value={newPassword}
+          onChangeText={setNewPassword}
+          secureTextEntry={true}
+        />
+
+        <Text style={styles.label}>Confirm Password</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="confirm password"
           value={password}
           onChangeText={setPassword}
           secureTextEntry={true}
         />       
-        
-         <TouchableOpacity style={styles.forget_button} onPress={handleForgetNavigate}>
-         <Text style={styles.Forget_pw}>Forget Password ? </Text>
-        </TouchableOpacity>
         {/* Custom Submit Button */}
         <TouchableOpacity style={styles.submit_button} onPress={handleSubmit}>
           <Text style={styles.submit_button_text}>Submit</Text>
@@ -118,7 +102,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
     elevation: 3,
-    marginTop: 30,
+    marginTop: 50,
   },
 
   label: {

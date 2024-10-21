@@ -142,8 +142,44 @@ const getWorkPermitListByConditions = async (req, res) => {
   }
 };
 
-module.exports = { WorkPermitCreate , getWorkPermitListByConditions};
+const getPageOnePermit = async (req, res) => {
+  try {
+    const { _id } = req.query; // Get the work permit _id from query parameters
 
+    if (!_id) {
+      return res.status(400).send({
+        success: false,
+        message: "Work permit _id is required",
+      });
+    }
+
+    // Find the work permit by its _id and select specific fields
+    const workPermit = await WorkPermitModel.findById(_id)
+      .select('p1IssueDate p1TStart p1TEnd p1IsuNme p1IsuDepNme p1ContractorNme p1ContractorComNme p1CrosRef p1JobLoca p1JobDes');
+
+    if (!workPermit) {
+      return res.status(404).send({
+        success: false,
+        message: "Work permit not found",
+      });
+    }
+
+    // Send the response with the selected work permit details
+    res.status(200).send({
+      success: true,
+      workPermit,
+    });
+
+  } catch (error) {
+    console.error("Error retrieving work permit details: ", error);
+    res.status(500).send({
+      success: false,
+      message: `Error retrieving work permit details: ${error.message}`,
+    });
+  }
+};
+
+module.exports = { WorkPermitCreate , getWorkPermitListByConditions , getPageOnePermit};
 
 
 

@@ -97,5 +97,53 @@ const WorkPermitCreate = async (req, res) => {
   }
 };
 
-module.exports = { WorkPermitCreate };
+const getWorkPermitListByConditions = async (req, res) => {
+  try {
+    const { fillPermissionID } = req.query;  // Get fillPermissionID from query params
+
+    if (!fillPermissionID) {
+      return res.status(400).send({
+        success: false,
+        message: "fillPermissionID is required"
+      });
+    }
+
+    // Get today's date and strip time part
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Find all permits matching the condition
+    const permits = await WorkPermitModel.find({
+      fillPermissionID,
+      p1IssueDate: { $gte: today, $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000) }
+    })
+      .select('permitName _id') // Select only permitName and _id
+      .sort({ permitCreateTime: -1 }); // Sort by permitCreateTime in descending order
+
+    if (!permits || permits.length === 0) {
+      return res.status(404).send({
+        success: false,
+        message: "No work permits found matching the conditions"
+      });
+    }
+
+    // Send response with the permits
+    res.status(200).send({
+      success: true,
+      permits
+    });
+
+  } catch (error) {
+    console.error("Error retrieving work permits: ", error);
+    res.status(500).send({
+      success: false,
+      message: `Error retrieving work permits: ${error.message}`,
+    });
+  }
+};
+
+module.exports = { WorkPermitCreate , getWorkPermitListByConditions};
+
+
+
 

@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const workPermitSchema = new mongoose.Schema({
-  permitId: {
-    type: Number,
-    unique: true,
-    auto: true
-  },
   permitName: {
     type: String,
     required: true

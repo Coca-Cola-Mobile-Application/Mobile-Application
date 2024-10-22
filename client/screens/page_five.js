@@ -39,7 +39,7 @@ export default function PageFive({navigation}) {
       <View style={globalStyles.insideContainer}>
         <ScrollView>
           <View style={globalStyles.bodyView}>
-            <Topic topicDetail={topicDetails[9]} />
+            <Topic topicDetail={topicDetails[10]} />
             <FlatList
               data={PPEdata}
               renderItem={({item}) => (

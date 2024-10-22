@@ -20,4 +20,3 @@ export default function PageEight({ navigation }) {
 const styles = StyleSheet.create({
 
 });
-//<Button title="Next" onPress={()=> navigation.navigate('PageNine')} />

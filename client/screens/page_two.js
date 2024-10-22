@@ -15,7 +15,7 @@ export default function PageTwo({ navigation }) {
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={globalStyles.container}
-        >
+        > 
             <View style={globalStyles.insideContainer}>
                 <ScrollView>
                     <View style={globalStyles.bodyView}>

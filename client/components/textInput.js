@@ -3,10 +3,10 @@ import { StyleSheet, TextInput, View, TouchableOpacity, Platform, Pressable } fr
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function InputComponent({ pickerDisplay, editable, keyBoardType, placeHolder, mode }) {
-    const [date, setDate] = useState(new Date());
+export default function InputComponent({ pickerDisplay, editable, keyBoardType, placeHolder, mode,id,updateFunction,value}) {
+    const [date, setDate] = useState(value ? new Date(value) : new Date());
     const [show, setShow] = useState(false);
-    const [dpDate, setdpDate] = useState("");
+    //const [dpDate, setdpDate] = useState("");
 
     const pickerHandler = () => {
         setShow(!show);
@@ -16,7 +16,8 @@ export default function InputComponent({ pickerDisplay, editable, keyBoardType, 
         if (event.type === "set" && selectedDate) {
             const currentDate = selectedDate || date;
             setDate(currentDate);
-            setdpDate(currentDate.toDateString());
+            //setdpDate(currentDate.toDateString());
+            handleTextChange(date);
 
             if (Platform.OS === "android") {
                 pickerHandler();
@@ -25,6 +26,11 @@ export default function InputComponent({ pickerDisplay, editable, keyBoardType, 
             pickerHandler();
         }
     };
+
+    const handleTextChange = (newValue) => {
+        updateFunction(id, newValue);  // Pass the new value and id to the parent
+    };
+
 
     return (
         <View style={styles.inputStyle}>
@@ -36,8 +42,8 @@ export default function InputComponent({ pickerDisplay, editable, keyBoardType, 
                         keyboardType={keyBoardType}
                         placeholder={placeHolder}
                         multiline={true}
-                        value={dpDate}
-                        onChangeText={setdpDate}
+                        value={pickerDisplay ? value.toDateString() :value}
+                        onChangeText={handleTextChange}
                     />
                 </Pressable>
             )}

@@ -35,6 +35,7 @@ export default function PageNine({ navigation }) {
                 </ScrollView>
             </View>
         </LinearGradient>
+        
     );
 }
 

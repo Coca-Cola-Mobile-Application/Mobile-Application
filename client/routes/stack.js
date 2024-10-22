@@ -9,10 +9,13 @@ import PageSeven from '../screens/page_seven';
 import PageEight from '../screens/page_eight';
 import PageNine from '../screens/page_nine';
 import PageTen from '../screens/page_ten';
+import PageEleven from '../screens/page_eleven';
+import PageTwelve from '../screens/page_twelve';
+import PageThirteen from '../screens/page_thirteen';
 
 const Stack = createNativeStackNavigator();
 
-export default function StackNavigator() {
+export function StackNavigator() {
     return (
       <Stack.Navigator
         initialRouteName="PageOne"
@@ -42,6 +45,41 @@ export default function StackNavigator() {
         <Stack.Screen name="PageEight" component={PageEight} />
         <Stack.Screen name="PageNine" component={PageNine} />
         <Stack.Screen name="PageTen" component={PageTen} />
+        <Stack.Screen name="PageEleven" component={PageEleven} />
+        <Stack.Screen name="PageTwelve" component={PageTwelve} />
+        <Stack.Screen name="PageThirteen" component={PageThirteen} />
       </Stack.Navigator>
     );
   }
+
+  export function PageTenStack() {
+    return (
+      <Stack.Navigator
+        initialRouteName="PageTen"
+        screenOptions={{
+          headerStyle: { backgroundColor: '#008000' },
+          headerTintColor: '#fff',
+          headerTitleStyle: { fontWeight: 'bold' },
+          headerTitleAlign: 'center',
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen
+          name="PageTen"
+          component={PageTen}
+          options={{ title: 'Page Ten' }}
+        />
+        <Stack.Screen
+          name="BasicInformation"
+          component={PageEleven}
+          options={{ title: 'Basic Information' }}
+        />
+        <Stack.Screen
+          name="DetailedInformation"
+          component={PageTwelve}
+          options={{ title: 'Detailed Information' }}
+        />
+      </Stack.Navigator>
+    );
+  }
+  

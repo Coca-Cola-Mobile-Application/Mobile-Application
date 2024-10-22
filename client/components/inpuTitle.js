@@ -16,5 +16,6 @@ const styles = StyleSheet.create({
     decorateTitle:{
         fontWeight:'bold',
         fontSize:17,
+        marginBottom:5,
     }                      
 }); 

@@ -53,12 +53,19 @@ export default function PageThree({navigation}) {
 
   const fetchData = async () => {
     try {
-        //send objectID relevant to work permit and assign response object to setDataSet
-        //give api call using axios
         setDataSet(tempData);
     } catch (error) {
         console.error("Error fetching data: ", error);
     }
+        // try {
+        //   // API call to fetch data for a specific work permit using objectID
+        //   const response = await axios.get(`http://your-backend-url/api/workpermits/${objectID}`);
+          
+        //   // Assuming the response contains the data you need
+        //   setDataSet(response.data);
+        // } catch (error) {
+        //     console.error("Error fetching data: ", error);
+        // }
   };
 
   useFocusEffect(

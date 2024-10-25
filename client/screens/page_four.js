@@ -1,6 +1,7 @@
-import React from "react";
-import { useState } from "react";
-import {StyleSheet, View, Text, TouchableOpacity ,Pressable} from 'react-native';
+import React from "react"; 
+import { useEffect , useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import {StyleSheet, View, Text, TouchableOpacity ,Pressable,Button} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { globalStyles } from "../styles/global";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
@@ -8,8 +9,9 @@ import Topic from "../components/topic";
 import SubTopic from "../components/subTopic";
 import { topicDetails } from '../data/formtopics';
 import Card from '../components/card';
-import { PPEdata } from "../data/formdata4";
+import { PPEdata , tempData} from "../data/formdata4";
 import CheckBoxContainer from '../components/checkBox'; 
+import axios from 'axios';
 
 export default function PageFour({navigation}) {
 
@@ -28,7 +30,92 @@ export default function PageFour({navigation}) {
     }));
   };
 
-  const subtopicname="Requested by issuer";
+  const [dataSet,setDataSet] =useState({
+    p5PpeGeneral:[],
+    p5PpeHotWork:[],
+    p5PpeElectricalWork:[],
+    p5PpeWorkAtHeight:[], 
+    p5PpeConfinedSpace:[]
+  });
+
+  const [changed,setChanged]=useState({
+    p5PpeGeneral:false,
+    p5PpeHotWork:false,
+    p5PpeElectricalWork:false,
+    p5PpeWorkAtHeight:false,
+    p5PpeConfinedSpace:false,
+  });
+
+  const fetchData = async () => {
+    try {
+        setDataSet(tempData);
+    } catch (error) {
+        console.error("Error fetching data: ", error);
+    }
+    // try {
+    //   const objectID = route.params.objectID; // Get the objectID from route params
+    //   const response = await axios.get(`http://your-backend-url/api/workpermits/${objectID}`);
+      
+    //   // Update the dataset with the response data
+    //   setDataSet(response.data);
+
+    //   // Show a success alert
+    //   Alert.alert('Data fetched successfully');
+    // } catch (error) {
+    //     console.error("Error fetching data: ", error);
+    //     Alert.alert('Error fetching data');
+    // }
+  };
+
+  useFocusEffect(
+      React.useCallback(() => {
+          // Re-fetch data when the screen comes into focus
+          fetchData();
+      }, [])
+  );
+
+  const updatearray = (optionTitle,value,valueID) => {
+    let newArray=[...dataSet[valueID]];
+      if(value){
+        newArray.push(optionTitle);
+      }else{
+        newArray = newArray.filter(item => item !== optionTitle);
+      }
+    setDataSet((prevDataSet) => ({
+        ...prevDataSet,
+        [valueID]: newArray
+    }));
+
+    setChanged((prevChanged) => ({
+        ...prevChanged,
+        [valueID]: true
+    }));
+  };  
+
+  const saveData = async () => {
+    // Filter changed data
+    const changedFields = {};
+    Object.keys(changed).forEach((key) => {
+        if (changed[key]) {
+            changedFields[key] = dataSet[key];
+        }
+    });
+
+    if (Object.keys(changedFields).length === 0) {
+        Alert.alert('No changes to save');
+        return;
+    }
+
+    try {
+        const objectID = route.params.objectID;
+        const response = await axios.put(`http://your-backend-url/api/workpermits/${objectID}`, changedFields);
+        Alert.alert('Data saved successfully');
+    } catch (error) {
+        console.error("Error saving data: ", error);
+        Alert.alert('Error saving data');
+    }
+  };
+
   return (
     <LinearGradient
       colors={['#4751A0', '#4686A0']}
@@ -52,6 +139,11 @@ export default function PageFour({navigation}) {
                     renderItem={({ item }) => (
                       <CheckBoxContainer
                         optionTitle={item.attribute}
+                        value={dataSet[item.valueID].includes(item.attribute) ? true : false}
+                        id={item.key}
+                        updateFunction={updatearray}
+                        number={1}
+                        valueID={item.valueID}
                       />
                     )}
                     scrollEnabled={false}
@@ -63,6 +155,9 @@ export default function PageFour({navigation}) {
             />
           </View>
         </ScrollView>
+        <View style={{ marginTop: 20 }}>
+            <Button title="Save" onPress={saveData} />
+        </View>
       </View>
     </LinearGradient>
   );

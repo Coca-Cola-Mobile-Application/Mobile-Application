@@ -1,9 +1,8 @@
 import React from "react";
 import { useEffect , useState } from "react";
-import { useFocusEffect } from "@react-navigation/native";
 import { globalStyles } from "../styles/global";
 import Card from '../components/card';
-import { StyleSheet, View, FlatList ,ScrollView,Button ,Alert } from 'react-native';
+import { StyleSheet, View, FlatList ,ScrollView} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Topic from "../components/topic";
 import InputComponent from "../components/textInput";
@@ -61,12 +60,9 @@ export default function PageOne({ navigation,route }) {
         }
     };
 
-    useFocusEffect(
-        React.useCallback(() => {
-            // Re-fetch data when the screen comes into focus
-            fetchData();
-        }, [])
-    );
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     const updateDataSet = (id, value) => {
         setDataSet((prevDataSet) => ({
@@ -79,30 +75,6 @@ export default function PageOne({ navigation,route }) {
             [id]: true
         }));
     };    
-
-    const saveData = async () => {
-        // Filter changed data
-        const changedFields = {};
-        Object.keys(changed).forEach((key) => {
-            if (changed[key]) {
-                changedFields[key] = dataSet[key];
-            }
-        });
-
-        if (Object.keys(changedFields).length === 0) {
-            Alert.alert('No changes to save');
-            return;
-        }
-
-        try {
-            const objectID = route.params.objectID;
-            const response = await axios.put(`http://your-backend-url/api/workpermits/${objectID}`, changedFields);
-            Alert.alert('Data saved successfully');
-        } catch (error) {
-            console.error("Error saving data: ", error);
-            Alert.alert('Error saving data');
-        }
-    };
 
     return (
         <LinearGradient
@@ -149,9 +121,6 @@ export default function PageOne({ navigation,route }) {
                         />
                     </View>
                 </ScrollView>
-                <View style={{ marginTop: 20 }}>
-                    <Button title="Save" onPress={saveData} />
-                </View>
             </View>
         </LinearGradient>
     );

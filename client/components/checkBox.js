@@ -5,16 +5,24 @@ import CheckBox from 'expo-checkbox';
 import { globalStyles } from "../styles/global";
 
 
-export default function CheckBoxContainer({optionTitle})
+export default function CheckBoxContainer({optionTitle ,value , id ,updateFunction , number,valueID})
 {
-    const [isChecked,setChecked] =useState(false);
+    const handleTextChange = (newValue) => {
+        if(number){
+            updateFunction(optionTitle,newValue,valueID);
+        }
+        else{
+            updateFunction(id, newValue);  // Pass the new value and id to the parent
+        }
+    };
+
     return(
         <View style={styles.boxContainer}>
             <Text style={globalStyles.checkBoxTitle} >{optionTitle}</Text>
             <CheckBox
-              value={isChecked}
-              onValueChange={setChecked}
-              color={isChecked ? '#00FF00': undefined}
+              value={value}
+              onValueChange={handleTextChange}
+              color={value ? '#00FF00': undefined}
               style={styles.CheckBoxs}
             />
         </View>

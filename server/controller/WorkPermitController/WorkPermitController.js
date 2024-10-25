@@ -226,7 +226,82 @@ const updatePageOnePermit = async (req, res) => {
   }
 };
 
-module.exports = { WorkPermitCreate, getWorkPermitListByConditions, getPageOnePermit, updatePageOnePermit };
+const getPageTwoPermit = async (req, res) => {
+  try {
+    const { _id } = req.query; // Get the work permit _id from query parameters
+
+    if (!_id) {
+      return res.status(400).send({
+        success: false,
+        message: "Work permit _id is required",
+      });
+    }
+
+    // Find the work permit by its _id and select only the p2HazardsIdentified field
+    const workPermit = await WorkPermitModel.findById(_id)
+      .select('p2HazardsIdentified');
+
+    if (!workPermit) {
+      return res.status(404).send({
+        success: false,
+        message: "Work permit not found",
+      });
+    }
+
+    // Send the response with the p2HazardsIdentified field
+    res.status(200).send({
+      success: true,
+      p2HazardsIdentified: workPermit.p2HazardsIdentified,
+    });
+
+  } catch (error) {
+    console.error("Error retrieving hazards identified: ", error);
+    res.status(500).send({
+      success: false,
+      message: `Error retrieving hazards identified: ${error.message}`,
+    });
+  }
+};
+
+const getPageThreePermit = async (req, res) => {
+  try {
+    const { _id } = req.query; 
+
+    if (!_id) {
+      return res.status(400).send({
+        success: false,
+        message: "Work permit _id is required",
+      });
+    }
+
+    // Find the work permit by its _id and select specific fields
+    const workPermit = await WorkPermitModel.findById(_id)
+      .select('p3DriveOrPanelInvolved p3motorIsolation p3motorCertifiedBy p3MotorCrDate p3motorCrTime p3ServicesIsolated p3HowServiceIsolated p3serviceCertifiedBy p3serviceCrDate p3serviceCrTime p4EquipmentInvolved p4ProcessIsolated p4ProcessCertifiedBy p4ProcessCrDate p4ProcessCrTime');
+
+    if (!workPermit) {
+      return res.status(404).send({
+        success: false,
+        message: "Work permit not found",
+      });
+    }
+
+    // Send the response with the selected work permit details
+    res.status(200).send({
+      success: true,
+      workPermit,
+    });
+
+  } catch (error) {
+    console.error("Error retrieving page three permit details: ", error);
+    res.status(500).send({
+      success: false,
+      message: `Error retrieving page three permit details: ${error.message}`,
+    });
+  }
+};
+
+
+module.exports = { WorkPermitCreate, getWorkPermitListByConditions, getPageOnePermit, updatePageOnePermit ,getPageThreePermit,getPageTwoPermit};
 
 
 

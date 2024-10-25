@@ -255,10 +255,10 @@ const getPageTwoPermit = async (req, res) => {
     });
 
   } catch (error) {
-    console.error("Error retrieving hazards identified: ", error);
+    console.error("Error retrieving page two identified: ", error);
     res.status(500).send({
       success: false,
-      message: `Error retrieving hazards identified: ${error.message}`,
+      message: `Error retrieving page two identified: ${error.message}`,
     });
   }
 };
@@ -300,8 +300,45 @@ const getPageThreePermit = async (req, res) => {
   }
 };
 
+const getPageFourPermit = async (req, res) => {
+  try {
+    const { _id } = req.query; 
 
-module.exports = { WorkPermitCreate, getWorkPermitListByConditions, getPageOnePermit, updatePageOnePermit ,getPageThreePermit,getPageTwoPermit};
+    if (!_id) {
+      return res.status(400).send({
+        success: false,
+        message: "Work permit _id is required",
+      });
+    }
+
+    // Find the work permit by its _id and select specific fields
+    const workPermit = await WorkPermitModel.findById(_id)
+      .select('p5PpeGeneral p5PpeHotWork p5PpeElectricalWork p5PpeWorkAtHeight p5PpeConfinedSpace');
+
+    if (!workPermit) {
+      return res.status(404).send({
+        success: false,
+        message: "Work permit not found",
+      });
+    }
+
+    // Send the response with the selected work permit details
+    res.status(200).send({
+      success: true,
+      workPermit,
+    });
+
+  } catch (error) {
+    console.error("Error retrieving page four permit details: ", error);
+    res.status(500).send({
+      success: false,
+      message: `Error retrieving page four permit details: ${error.message}`,
+    });
+  }
+};
+
+
+module.exports = { WorkPermitCreate, getWorkPermitListByConditions, getPageOnePermit, updatePageOnePermit ,getPageThreePermit,getPageTwoPermit,getPageFourPermit};
 
 
 

@@ -1,103 +1,122 @@
 
-export const optionSet=[
+export const optionSet=[ 
     {
-        key:'1',
+        key:'corrosive',
         optionName:'Corrosive Chemical'
     },
     {
-        key:'2',
+        key:'flammables',
         optionName:'Flammables'
     },
     {
-        key:'3',
+        key:'explosives',
         optionName:'Explosives'
     },
     {
-        key:'4',
+        key:'compressedGas',
         optionName:'Compressed Gas'
     },
     {
-        key:'5',
+        key:'hotMaterial',
         optionName:'Hot Materials'
     },
     {
-        key:'6',
+        key:'steam',
         optionName:'Steam'
     },
     {
-        key:'7',
+        key:'fumes',
         optionName:'Fumes/Dust'
     },
     {
-        key:'8',
+        key:'loneWork',
         optionName:'Lone Work'
     },
     {
-        key:'9',
+        key:'movingMachine',
         optionName:'Moving Machine'
     },
     {
-        key:'10',
+        key:'autoStartEquipment',
         optionName:'Auto Start Equipment'
     },
     {
-        key:'11',
+        key:'traffic',
         optionName:'Traffic'
     },
     {
-        key:'12',
+        key:'confinedSpace',
         optionName:'Confined Space'
     },
     {
-        key:'13',
+        key:'lackOxygen',
         optionName:'Lack Oxygen'
     },
     {
-        key:'14',
+        key:'heightWork',
         optionName:'Height Work'
     },
     {
-        key:'15',
+        key:'unsafeAccess',
         optionName:'Unsafe Access'
     },
     {
-        key:'16',
+        key:'fragileRoof',
         optionName:'Fragile Roof'
     },
     {
-        key:'17',
+        key:'liveElectrical',
         optionName:'Live Electrical'
     },
     {
-        key:'18',
+        key:'overheadDanger',
         optionName:'Overhead Danger'
     },
     {
-        key:'19',
+        key:'buriedCables',
         optionName:'Buried Cables'
     },
     {
-        key:'20',
+        key:'buriedPipelines',
         optionName:'Buried Pipelines'
     },
     {
-        key:'21',
-        optionName:'Buried Cables'
-    },
-    {
-        key:'22',
-        optionName:'Buried Pipelines'
-    },
-    {
-        key:'23',
+        key:'highLowPressure',
         optionName:'High/Low Pressure'
     },
     {
-        key:'24',
+        key:'highLowTemperature',
         optionName:'High/Low Temperature'
     },
     {
-        key:'25',
+        key:'weatherCondition',
         optionName:'Weather Condition'
     },
 ]
+
+
+export const tempData={
+    corrosive:false,
+    flammables:false,
+    explosives:false,
+    compressedGas:false,
+    hotMaterial:false,
+    steam:false,
+    fumes:false,
+    loneWork:false,
+    movingMachine:false,
+    autoStartEquipment:false,
+    traffic:false,
+    confinedSpace:false,
+    lackOxygen:false,
+    heightWork:false,
+    unsafeAccess:false,
+    fragileRoof:false,
+    liveElectrical:false,
+    overheadDanger:false,
+    buriedCables:false,
+    buriedPipelines:false,
+    highLowPressure:false,
+    highLowTemperature:false,
+    weatherCondition:false,
+}

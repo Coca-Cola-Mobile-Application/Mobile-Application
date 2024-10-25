@@ -337,8 +337,45 @@ const getPageFourPermit = async (req, res) => {
   }
 };
 
+const getPageFivePermit = async (req, res) => {
+  try {
+    const { _id } = req.query; 
 
-module.exports = { WorkPermitCreate, getWorkPermitListByConditions, getPageOnePermit, updatePageOnePermit ,getPageThreePermit,getPageTwoPermit,getPageFourPermit};
+    if (!_id) {
+      return res.status(400).send({
+        success: false,
+        message: "Work permit _id is required",
+      });
+    }
+
+    // Find the work permit by its _id and select specific fields
+    const workPermit = await WorkPermitModel.findById(_id)
+      .select('p6PrecautionGeneral p6PrecautionHotWork p6PrecautionElectricalWork p6PrecautionWorkAtHeight p6PrecautionConfinedSpace');
+
+    if (!workPermit) {
+      return res.status(404).send({
+        success: false,
+        message: "Work permit not found",
+      });
+    }
+
+    // Send the response with the selected work permit details
+    res.status(200).send({
+      success: true,
+      workPermit,
+    });
+
+  } catch (error) {
+    console.error("Error retrieving page four permit details: ", error);
+    res.status(500).send({
+      success: false,
+      message: `Error retrieving page four permit details: ${error.message}`,
+    });
+  }
+};
+
+
+module.exports = { WorkPermitCreate, getWorkPermitListByConditions, getPageOnePermit, updatePageOnePermit ,getPageThreePermit,getPageTwoPermit,getPageFourPermit,getPageFivePermit};
 
 
 

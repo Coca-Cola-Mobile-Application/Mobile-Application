@@ -1,7 +1,6 @@
 const express = require('express');
-const { WorkPermitCreate } = require('../../controller/WorkPermitController/WorkPermitController');
-const { getWorkPermitListByConditions } = require('../../controller/WorkPermitController/WorkPermitController');
-const { getPageOnePermit } = require('../../controller/WorkPermitController/WorkPermitController');
+const { getWorkPermitListByConditions,WorkPermitCreate } = require('../../controller/WorkPermitController/WorkPermitController');
+const { getPageOnePermit ,updatePageOnePermit} = require('../../controller/WorkPermitController/WorkPermitController');
 const router = express.Router();
 
 
@@ -9,5 +8,7 @@ const router = express.Router();
 router.post("/create",WorkPermitCreate);
 router.get("/workpermits", getWorkPermitListByConditions);
 router.get("/pageOnePermit", getPageOnePermit);
+router.put("/pageOnePermit", updatePageOnePermit);
+
 
 module.exports = router;

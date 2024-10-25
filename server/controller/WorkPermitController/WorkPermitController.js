@@ -179,7 +179,55 @@ const getPageOnePermit = async (req, res) => {
   }
 };
 
-module.exports = { WorkPermitCreate , getWorkPermitListByConditions , getPageOnePermit};
+const updatePageOnePermit = async (req, res) => {
+  try {
+    const { _id } = req.query;  
+
+    if (!_id) {
+      return res.status(400).send({
+        success: false,
+        message: "Work permit _id is required",
+      });
+    }
+
+    const updateFields = req.body; 
+
+    // Check if the permit exists before updating
+    const workPermit = await WorkPermitModel.findById(_id);
+    
+    if (!workPermit) {
+      return res.status(404).send({
+        success: false,
+        message: "Work permit not found",
+      });
+    }
+
+    // Update only the fields provided in the request
+    Object.keys(updateFields).forEach(key => {
+      if (workPermit[key] !== undefined) {
+        workPermit[key] = updateFields[key];
+      }
+    });
+
+    // Save the updated work permit
+    await workPermit.save();
+
+    res.status(200).send({
+      success: true,
+      message: "Work permit updated successfully",
+      workPermit
+    });
+  } catch (error) {
+    console.error("Error updating work permit: ", error);
+    res.status(500).send({
+      success: false,
+      message: `Error updating work permit: ${error.message}`,
+    });
+  }
+};
+
+module.exports = { WorkPermitCreate, getWorkPermitListByConditions, getPageOnePermit, updatePageOnePermit };
+
 
 
 

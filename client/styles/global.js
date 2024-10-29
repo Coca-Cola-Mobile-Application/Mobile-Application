@@ -30,11 +30,5 @@ export const globalStyles = StyleSheet.create({
     checkBoxTitle:{
         fontWeight:'bold',
         fontSize:15,
-    }, 
-    titleText:{
-        color:'#000'
-    },
-    imageSectionP:{
-        position: 'absolute',
-    },
+    },       
 });

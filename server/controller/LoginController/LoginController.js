@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const UserModel = require("../../model/UserModel/userModel");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
 // Handle the user login
 const LoginController = async (req, res) => {

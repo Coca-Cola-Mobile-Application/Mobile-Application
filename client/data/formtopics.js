@@ -38,44 +38,15 @@ export const topicDetails =[
     {
         number:'10',
         title:"PPE TO BE USED  (TICK BELLOW AND RELEVANT PICTURE)"
-    },
-    {
-        number:'11',
-        title:"PRECAUTIONS CHECKLIST"
-    },
-    {
-        number:'16',
-        title:"NAMES OF EMPLOYEES ON THE JOB"
-    },
-    {
-        number:'17',
-        title:"Create New Work Permit"
-    },
-    {
-        number:'18',
-        title:"Select Permit Type"
-    },
-    {
-        number:'19',
-        title:"New Permits To Fill"
-    },
-    {
-        number:'20',
-        title:"Permits To Accept"
-    },
-    {
-        number:'21',
-        title:"Permit Authorization"
-    },
-
+    }
 ]
- 
+
 export const sections = [
     {
         topic: topicDetails[0],
         data: [
             {
-                key: 'p1IssueDate',
+                key: '1',
                 inputTitle: 'Date',
                 placeHolder: 'select date',
                 mode: 'date',
@@ -83,7 +54,7 @@ export const sections = [
                 editable: false,
             },
             {
-                key: 'p1TStart',
+                key: '2',
                 inputTitle: 'Time Start',
                 placeHolder: 'select start time',
                 mode: 'time',
@@ -91,7 +62,7 @@ export const sections = [
                 editable: false,
             },
             {
-                key: 'p1TEnd',
+                key: '3',
                 inputTitle: 'Time End',
                 placeHolder: 'select end time',
                 mode: 'time',
@@ -104,14 +75,14 @@ export const sections = [
         topic: topicDetails[1],
         data: [
             {
-                key: 'p1IsuNme',
+                key: '3',
                 inputTitle: 'Name',
                 placeHolder: 'enter name',
                 pickerDisplay: false,
                 editable: true,
             },
             {
-                key: 'p1IsuDepNme',
+                key: '4',
                 inputTitle: 'Dept',
                 placeHolder: 'enter department name',
                 pickerDisplay: false,
@@ -123,14 +94,14 @@ export const sections = [
         topic: topicDetails[2],
         data: [
             {
-                key: 'p1ContractorNme',
+                key: '5',
                 inputTitle: 'Name',
                 placeHolder: 'enter name',
                 pickerDisplay: false,
                 editable: true,
             },
             {
-                key: 'p1ContractorComNme',
+                key: '6',
                 inputTitle: 'Dept/Co',
                 placeHolder: 'enter department name',
                 pickerDisplay: false,
@@ -142,7 +113,7 @@ export const sections = [
         topic: topicDetails[3],
         data: [
             {
-                key: 'p1CrosRef',
+                key: '7',
                 placeHolder: 'enter name',
                 pickerDisplay: false,
                 editable: true,
@@ -153,7 +124,7 @@ export const sections = [
         topic: topicDetails[4],
         data: [
             {
-                key: 'p1JobLoca',
+                key: '8',
                 placeHolder: 'enter location',
                 pickerDisplay: false,
                 editable: true,
@@ -164,7 +135,7 @@ export const sections = [
         topic: topicDetails[5],
         data: [
             {
-                key: 'p1JobDes',
+                key: '9',
                 placeHolder: 'enter description',
                 pickerDisplay: false,
                 editable: true,

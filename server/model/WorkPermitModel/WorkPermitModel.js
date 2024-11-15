@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const workPermitSchema = new mongoose.Schema({
-  permitId: {
-    type: Number,
-    unique: true,
-    auto: true
-  },
   permitName: {
     type: String,
     required: true
@@ -52,27 +47,27 @@ const workPermitSchema = new mongoose.Schema({
   },
   p1ContractorNme: {
     type: String,
-    required: true
+    default:''
   },
   p1ContractorComNme: {
     type: String,
-    required: true
+    default:''
   },
   p1JobLoca: {
     type: String,
-    required: true
+    default:''
   },
   p1JobDes: {
     type: String,
-    required: true
+    default:''
   },
   DepOrSection: {
     type: String,
-    required: true
+    default:''
   },
   p1CrosRef: {
     type: String,
-    required: true
+    default:''
   },
   p2HazardsIdentified: {
     type: [String],

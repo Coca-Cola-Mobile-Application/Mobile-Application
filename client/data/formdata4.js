@@ -6,31 +6,38 @@ export const PPEdata =[
         DropSelection:[
             {
                 key:"1",
-                attribute: "Safety Shoes/Boots"
+                attribute: "Safety Shoes/Boots",
+                valueID:"p5PpeGeneral"
             },
             {
                 key:"2",
-                attribute: "Goggles/Spectacles"
+                attribute: "Goggles/Spectacles",
+                valueID:"p5PpeGeneral"
             },
             {
                 key:"3",
-                attribute:"Ear plugs"
+                attribute:"Ear plugs",
+                valueID:"p5PpeGeneral"
             },
             {
                 key:"4",
-                attribute: "Mask"
+                attribute: "Mask",
+                valueID:"p5PpeGeneral"
             },
             {
                 key:"5",
-                attribute: "Helmet"
+                attribute: "Helmet",
+                valueID:"p5PpeGeneral"
             },
             {
                 key:"6",
-                attribute: "Gloves(Cut Resistent,Cryogenic,etc)"
+                attribute: "Gloves(Cut Resistent,Cryogenic,etc)",
+                valueID:"p5PpeGeneral"
             },
             {
                 key:"7",
-                attribute: "High visibility jacket"
+                attribute: "High visibility jacket",
+                valueID:"p5PpeGeneral"
             }
         ],
     },
@@ -41,31 +48,38 @@ export const PPEdata =[
         DropSelection:[
             {
                 key:"1",
-                attribute: "Safety Shoes/Boots"
+                attribute: "Safety Shoes/Boots",
+                valueID:"p5PpeHotWork"
             },
             {
                 key:"2",
-                attribute: "Spectacle for Grinding"
+                attribute: "Spectacle for Grinding",
+                valueID:"p5PpeHotWork"
             },
             {
                 key:"3",
-                attribute:"Ear plugs for high noice area"
+                attribute:"Ear plugs for high noice area",
+                valueID:"p5PpeHotWork"
             },
             {
                 key:"4",
-                attribute: "Mask fro Welding"
+                attribute: "Mask fro Welding",
+                valueID:"p5PpeHotWork"
             },
             {
                 key:"5",
-                attribute: "Welding Shield"
+                attribute: "Welding Shield",
+                valueID:"p5PpeHotWork"
             },
             {
                 key:"6",
-                attribute: "Leather gloves for hot work"
+                attribute: "Leather gloves for hot work",
+                valueID:"p5PpeHotWork"
             },
             {
                 key:"7",
-                attribute: "Breathing apparatus for confined space entry Face shield"
+                attribute: "Breathing apparatus for confined space entry Face shield",
+                valueID:"p5PpeHotWork"
             }
         ],
     },
@@ -76,27 +90,33 @@ export const PPEdata =[
         DropSelection:[
             {
                 key:"1",
-                attribute: "Safety Shoes/Electrical Safety shoes"
+                attribute: "Safety Shoes/Electrical Safety shoes",
+                valueID:"p5PpeElectricalWork"
             },
             {
                 key:"2",
-                attribute: "Electrical Gloves"
+                attribute: "Electrical Gloves",
+                valueID:"p5PpeElectricalWork"
             },
             {
                 key:"3",
-                attribute:"Ear plugs for high noice area"
+                attribute:"Ear plugs for high noice area",
+                valueID:"p5PpeElectricalWork"
             },
             {
                 key:"4",
-                attribute: "Electrical suit"
+                attribute: "Electrical suit",
+                valueID:"p5PpeElectricalWork"
             },
             {
                 key:"5",
-                attribute: "Safety Helmet"
+                attribute: "Safety Helmet",
+                valueID:"p5PpeElectricalWork"
             },
             {
                 key:"6",
-                attribute: "High Visibility jacket"
+                attribute: "High Visibility jacket",
+                valueID:"p5PpeElectricalWork"
             }
         ],
     },
@@ -107,31 +127,38 @@ export const PPEdata =[
         DropSelection:[
             {
                 key:"1",
-                attribute: "Safety Shoes"
+                attribute: "Safety Shoes",
+                valueID:"p5PpeWorkAtHeight"
             },
             {
                 key:"2",
-                attribute: "Full body harness with double lanyard"
+                attribute: "Full body harness with double lanyard",
+                valueID:"p5PpeWorkAtHeight"
             },
             {
                 key:"3",
-                attribute:"Ear plugs high Noice area"
+                attribute:"Ear plugs high Noice area",
+                valueID:"p5PpeWorkAtHeight"
             },
             {
                 key:"4",
-                attribute: "Mask dust area"
+                attribute: "Mask dust area",
+                valueID:"p5PpeWorkAtHeight"
             },
             {
                 key:"5",
-                attribute: "Safety Helmet"
+                attribute: "Safety Helmet",
+                valueID:"p5PpeWorkAtHeight"
             },
             {
                 key:"6",
-                attribute: "High Visibility Jacket"
+                attribute: "High Visibility Jacket",
+                valueID:"p5PpeWorkAtHeight"
             },
             {
                 key:"7",
-                attribute: "Gloves(Cut Resistent,Cryogenic,etc)"
+                attribute: "Gloves(Cut Resistent,Cryogenic,etc)",
+                valueID:"p5PpeWorkAtHeight"
             }
         ],
     },
@@ -142,32 +169,48 @@ export const PPEdata =[
         DropSelection:[
             {
                 key:"1",
-                attribute: "Safety Shoes"
+                attribute: "Safety Shoes",
+                valueID:"p5PpeConfinedSpace"
             },
             {
                 key:"2",
-                attribute: "Goggles if chemical cleaning in confined"
+                attribute: "Goggles if chemical cleaning in confined",
+                valueID:"p5PpeConfinedSpace"
             },
             {
                 key:"3",
-                attribute:"Ear plugs in high noice in surrounding"
+                attribute:"Ear plugs in high noice in surrounding",
+                valueID:"p5PpeConfinedSpace"
             },
             {
                 key:"4",
-                attribute: "Breathing apparatus if hazardous fume"
+                attribute: "Breathing apparatus if hazardous fume",
+                valueID:"p5PpeConfinedSpace"
             },
             {
                 key:"5",
-                attribute: "Safety Helmet"
+                attribute: "Safety Helmet",
+                valueID:"p5PpeConfinedSpace"
             },
             {
                 key:"6",
-                attribute: "Full body harness with double lanyard"
+                attribute: "Full body harness with double lanyard",
+                valueID:"p5PpeConfinedSpace"
             },
             {
                 key:"7",
-                attribute: "Specific PVC suit"
+                attribute: "Specific PVC suit",
+                valueID:"p5PpeConfinedSpace"
             }
         ],
     }
 ]
+
+
+export const tempData ={
+    p5PpeGeneral:[],
+    p5PpeHotWork:[],
+    p5PpeElectricalWork:[],
+    p5PpeWorkAtHeight:[], 
+    p5PpeConfinedSpace:[]
+}

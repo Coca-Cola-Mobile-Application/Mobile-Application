@@ -47,7 +47,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-          initialRouteName="HomePage" // Ensure this matches one of your screen names
+          initialRouteName="dashboard" // Ensure this matches one of your screen names
           screenOptions={{
             headerStyle: {
               backgroundColor: '#008000',

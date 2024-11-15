@@ -14,5 +14,8 @@ router.get("/pageThreePermit", getPageThreePermit);
 router.get("/pageFourPermit", getPageFourPermit);
 router.get("/pageFivePermit", getPageFivePermit);
 
+// get all work permit
+// router.get("/all-workPermit" , getAllCreatedWorkPermit)
+
 
 module.exports = router;

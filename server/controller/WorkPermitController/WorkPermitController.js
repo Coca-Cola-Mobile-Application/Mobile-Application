@@ -97,6 +97,26 @@ const WorkPermitCreate = async (req, res) => {
   }
 };
 
+
+// const getAllCreatedWorkPermit = async()=>{
+//   try{
+//     const workPermit = await WorkPermitModel.findAll();
+
+//     res.status(200).send({
+//       success:true,
+//       message:"All worl permit received successfull",
+//       data:workPermit
+//     })
+
+//   }catch(){
+//     console.error("Error retrieving work permits: ", error);
+//     res.status(500).send({
+//       success: false,
+//       message: `Error retrieving work permits: ${error.message}`,
+//     });
+//   }
+// }
+
 const getWorkPermitListByConditions = async (req, res) => {
   try {
     const { fillPermissionID } = req.query;  // Get fillPermissionID from query params

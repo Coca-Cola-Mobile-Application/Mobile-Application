@@ -25,6 +25,15 @@ export default function viewAllPermit({ navigation }) {
 
   ]
 
+  const getCreatedAllPermitList = async()=>{
+    try{
+      
+
+    }catch(err){
+      alert(err)
+    }
+  }
+
   const handleSearch = () => {
     // Perform search action with the current searchText
     console.log('Searching for:', searchText);

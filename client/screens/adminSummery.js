@@ -2,31 +2,26 @@ import React from 'react';
 import { TouchableOpacity, View, Dimensions, StyleSheet, Text } from 'react-native';
 import {
   BarChart,
-  PieChart, // Imported PieChart from 'react-native-chart-kit'
+  PieChart,
   LineChart,
 } from 'react-native-chart-kit';
 
-// Get the screen width for the chart
 const screenWidth = Dimensions.get("window").width;
 
-// Define the chart style
 const graphStyle = {
-  // marginVertical: 8,
   borderRadius: 0,
 };
 
-// Define the chart configuration
 const chartConfig = {
   backgroundGradientFrom: "#60100B",
   backgroundGradientTo: "#60100B",
   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
   labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-  strokeWidth: 2, // optional, default 3
+  strokeWidth: 2,
   barPercentage: 0.5,
 };
 
 function AdminSummary() {
-  // Example data for the bar chart
   const data = {
     labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     datasets: [
@@ -61,23 +56,20 @@ function AdminSummary() {
   ];
 
   const handleBarPress = (value, label) => {
-    console.log('Clicked value:', value, 'Label:', label);
     alert(`You clicked ${label}: ${value}`);
   };
 
   const handlePieSlicePress = (value, label) => {
-    console.log('Clicked value:', value, 'Label:', label);
     alert(`You clicked ${label}: ${value}`);
   };
 
   return (
     <View style={styles.container}>
-      {/* Replaced <h2> with <Text> */}
       <View style={styles.title}>
         <Text style={styles.title_head}>Dashboard</Text>
       </View>
 
-      <View style={styles.barGraphSection}>
+      <View style={[styles.barGraphSection, styles.shadow]}>
         <BarChart
           style={graphStyle}
           data={data}
@@ -86,33 +78,19 @@ function AdminSummary() {
           chartConfig={chartConfig}
           verticalLabelRotation={30}
         />
-
-        {/* Overlaying TouchableOpacities on each bar */}
-        <View
-          style={{
-            position: 'absolute',
-            top: 0,
-            width: screenWidth,
-            height: 380,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}
-        >
+        
+        <View style={styles.overlayContainer}>
           {data.datasets[0].data.map((value, index) => (
             <TouchableOpacity
               key={index}
               style={{ width: screenWidth / data.labels.length, height: '100%' }}
               onPress={() => handleBarPress(value, data.labels[index])}
-            >
-              {/* <Text style={{ textAlign: 'center', marginTop: 360 }}>
-              {data.labels[index]}
-            </Text> */}
-            </TouchableOpacity>
+            />
           ))}
         </View>
-
       </View>
-      <View style={styles.pieChartSection}>
+
+      <View style={[styles.pieChartSection, styles.shadow]}>
         <PieChart
           data={dataPie}
           width={screenWidth - 40}
@@ -121,21 +99,10 @@ function AdminSummary() {
           accessor={'population'}
           backgroundColor={'transparent'}
           paddingLeft={'15'}
-          center={[10, 0]} // Adjusted center alignment
+          center={[10, 0]}
           absolute
         />
-
-        {/* Overlaying TouchableOpacities on each slice */}
-        <View
-          style={{
-            position: 'absolute',
-            top: 0,
-            width: screenWidth - 40,
-            height: 220,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}
-        >
+        <View style={styles.overlayContainer}>
           {dataPie.map((slice, index) => (
             <TouchableOpacity
               key={index}
@@ -149,7 +116,6 @@ function AdminSummary() {
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -159,19 +125,17 @@ const styles = StyleSheet.create({
 
   barGraphSection: {
     alignItems: "center",
-    marginBottom: 20, // Added margin between charts
-    marginTop: 20, // Adjusted positive margin for spacing
+    marginBottom: 20,
+    marginTop: 20,
   },
 
   pieChartSection: {
     alignItems: "center",
-    marginTop: 30, // Added margin for spacing
+    marginTop: 30,
   },
 
   title: {
-    marginBottom: 0,
-    alignItems: 'center', // Center the title
-    // backgroundColor:"red",
+    alignItems: 'center',
     marginTop: -30,
     height: 100,
   },
@@ -180,13 +144,35 @@ const styles = StyleSheet.create({
     fontSize: 40,
     textAlign: 'center',
     fontWeight: "600",
-    fontFamily: "Roboto, sans-serif",  // updated to a professional font
+    fontFamily: "Roboto, sans-serif",
     marginTop: 10,
-    paddingTop: 20,
-    color: "#E3242B",
-    // textDecorationLine:"underline"
-  }
+    padding: 20,
+    color: "#fff",
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5, // For Android shadow
+  },
 
+  // shadow: {
+  //   shadowColor: '#000',
+  //   shadowOffset: { width: 0, height: 4 },
+  //   shadowOpacity: 1,
+  //   shadowRadius: 5,
+  //   elevation: 5,
+  //   backgroundColor: '#E3242B', // needed for shadow to show up on Android
+  //   borderRadius: 0, // adds a subtle rounded corner
+  // },
+
+  overlayContainer: {
+    position: 'absolute',
+    top: 0,
+    width: screenWidth,
+    height: 380,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
 });
 
 export default AdminSummary;

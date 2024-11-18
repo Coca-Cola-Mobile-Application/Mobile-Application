@@ -8,13 +8,13 @@ const WorkPermitCreate = async (req, res) => {
     const issuerId = req.body.issuerObjectId;
     const user = await UserModel.findById(issuerId);
 
-    // if (!user) {
-    //   console.log(user);
-    //   return res.status(404).send({
-    //     success: false,
-    //     message: "Issuer not found"
-    //   });
-    // }
+    if (!user) {
+      console.log(user);
+      return res.status(404).send({
+        success: false,
+        message: "Issuer not found"
+      });
+    }
     
     // Create a new work permit document based on the request body
     const newWorkPermit = new WorkPermitModel({

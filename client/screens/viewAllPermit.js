@@ -30,12 +30,31 @@ export default function ViewAllPermit({ navigation }) {
     }
   };
 
-  const handleSearch = () => {
-    // Perform search action with the current searchText
+  const handleSearch = async() => {
     console.log('Searching for:', searchText);
-    alert(searchText);
+
+    try {
+      const SearchResponse = await axios.post("http://localhost:8080/api/v1/search/filter", { searchDate: searchText.replace(/\./g, "-") });
+
+      const formattedData = SearchResponse.data.data.map(item => {
+        const date = new Date(item.permitCreateTime);
+        const formattedDate = date.toISOString().split('T')[0]; // "YYYY-MM-DD"
+        
+        // Return a new object with the formatted date
+        return {
+          ...item,
+          permitCreateTime: formattedDate
+        };
+      });
+
+      setFormattedArray(formattedData);
+
+    } catch (error) {
+        alert(error);
+    }
   };
 
+  
   const handleNavigateIndividualPermit = (id) => {
     try {
       navigation.navigate('PermitView', { id: id });

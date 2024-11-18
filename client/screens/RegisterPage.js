@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet, Alert, Image, TouchableOpacity } from 'react-native';
@@ -7,12 +8,27 @@ export default function RegisterPage({ navigation }) {  // Accept navigation as 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     if (!name || !email || !password) {
       Alert.alert('Error', 'Please fill all fields.');
       return;
     }
-    Alert.alert('Success', `Name: ${name}, Email: ${email}`);
+    console.log(name , email , password);
+
+    try {
+      const registrationResponse = await axios.post("http://localhost:8080/api/v1/user/register",{username:name , email:email , password:password});
+      console.log(registrationResponse.data);
+      if (registrationResponse.data.success) {
+        alert(registrationResponse.data.message);
+        handleNavigate();
+      }else{
+        alert(registrationResponse.data.message);
+      }
+      
+    } catch (error) {
+      alert(error);
+    }
+    
   };
 
   const handleNavigate = () => {

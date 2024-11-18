@@ -10,8 +10,8 @@ const RegisterRouter = require("./router/RegisterRouter/RegisterRouter");
 const LoginUserRouter = require("./router/LoginRouter/LoginUserRouter");
 const WorkPermitRouter = require("./router/WorkPermitRouter/WorkPermitRouter");
 const UserRouter = require("./router/UserRouter/UserRouter");
+const SearchWorkPermitRouter = require("./router/SearchWorkPermitRouter/SearchWorkPermitRouter")
 
-  
 const app = express();
 
 // Middleware setup
@@ -23,6 +23,7 @@ app.use("/api/v1/user", RegisterRouter);
 app.use("/api/v1/user", LoginUserRouter);
 app.use("/api/v1/workPermit", WorkPermitRouter);
 app.use("/api/v1/userDetail", UserRouter);
+app.use("/api/v1/search" , SearchWorkPermitRouter)
 
 // // Basic error handling
 // app.use((err, req, res, next) => {

@@ -98,24 +98,25 @@ const WorkPermitCreate = async (req, res) => {
 };
 
 
-// const getAllCreatedWorkPermit = async()=>{
-//   try{
-//     const workPermit = await WorkPermitModel.findAll();
+const getAllCreatedWorkPermit = async(req,res)=>{
+  try{
+    const workPermit = await WorkPermitModel.find();
 
-//     res.status(200).send({
-//       success:true,
-//       message:"All worl permit received successfull",
-//       data:workPermit
-//     })
+    res.status(200).send({
+      success:true,
+      message:"All work permit received successfull",
+      data:workPermit
+    })
 
-//   }catch(){
-//     console.error("Error retrieving work permits: ", error);
-//     res.status(500).send({
-//       success: false,
-//       message: `Error retrieving work permits: ${error.message}`,
-//     });
-//   }
-// }
+  }catch(error){
+    console.error("Error retrieving work permits: ", error);
+    res.status(500).send({
+      success: false,
+      message: `Error retrieving work permits: ${error.message}`,
+    });
+  }
+}
+
 
 const getWorkPermitListByConditions = async (req, res) => {
   try {
@@ -395,7 +396,7 @@ const getPageFivePermit = async (req, res) => {
 };
 
 
-module.exports = { WorkPermitCreate, getWorkPermitListByConditions, getPageOnePermit, updatePageOnePermit ,getPageThreePermit,getPageTwoPermit,getPageFourPermit,getPageFivePermit};
+module.exports = {getAllCreatedWorkPermit , WorkPermitCreate, getWorkPermitListByConditions, getPageOnePermit, updatePageOnePermit ,getPageThreePermit,getPageTwoPermit,getPageFourPermit,getPageFivePermit};
 
 
 

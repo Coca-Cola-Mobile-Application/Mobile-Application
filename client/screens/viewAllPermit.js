@@ -1,137 +1,130 @@
-import React, { useState } from 'react';
-import {ScrollView, View, TextInput, Button, StyleSheet,Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, View, TextInput, Button, StyleSheet, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // Import icons from react-native-vector-icons
+import axios from 'axios';
 
-export default function viewAllPermit({ navigation }) {
+export default function ViewAllPermit({ navigation }) {
   const [searchText, setSearchText] = useState('');
+  const [formattedArray, setFormattedArray] = useState([]);
 
-  
-  const data = [
-    { id: 1, date: '2022-01-01', status: 'Approved' },
-    { id: 2, date: '2022-01-02', status: 'Pending' },
-    { id: 3, date: '2022-01-03', status: 'Rejected' },
-    { id: 4, date: '2022-01-03', status: 'Rejected' },
-    { id: 5, date: '2022-01-03', status: 'Rejected' },
-    { id: 6, date: '2022-01-03', status: 'Rejected' },
-    { id: 7, date: '2022-01-03', status: 'Rejected' },
-    { id: 8, date: '2022-01-03', status: 'Rejected' },
-    { id: 9, date: '2022-01-03', status: 'Rejected' },
-    { id: 10, date: '2022-01-03', status: 'Rejected' },
-    { id: 11, date: '2022-01-03', status: 'Rejected' },
-    { id: 12, date: '2022-01-03', status: 'Rejected' },
-    { id: 11, date: '2022-01-03', status: 'Rejected' },
-    { id: 12, date: '2022-01-03', status: 'Rejected' },
-    // Add more data as needed
+  const getCreatedAllPermitList = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/v1/workPermit/all-workPermit");
 
-  ]
+      // Map over each item in the data array to format the date
+      const formattedData = response.data.data.map(item => {
+        const date = new Date(item.permitCreateTime);
+        const formattedDate = date.toISOString().split('T')[0]; // "YYYY-MM-DD"
+        
+        // Return a new object with the formatted date
+        return {
+          ...item,
+          permitCreateTime: formattedDate
+        };
+      });
 
-  const getCreatedAllPermitList = async()=>{
-    try{
-      
+      setFormattedArray(formattedData);
 
-    }catch(err){
-      alert(err)
+    } catch (err) {
+      alert(err);
     }
-  }
+  };
 
   const handleSearch = () => {
     // Perform search action with the current searchText
     console.log('Searching for:', searchText);
-    alert(searchText)
+    alert(searchText);
   };
 
-  const handleNavigateIndividualPermit = async(id)=>{
+  const handleNavigateIndividualPermit = (id) => {
     try {
-      alert(id)
-      navigation.navigate('PermitView', { id: id})
+      navigation.navigate('PermitView', { id: id });
       console.log(id);
-    
+
     } catch (error) {
-       alert(error)
+      alert(error);
     }
-  }
+  };
+
+  useEffect(() => {
+    getCreatedAllPermitList();
+  }, []); // Add empty dependency array to prevent infinite loop
 
   return (
     <ScrollView style={styles.main_section}>
-      <p style={styles.permit_list_p}>All Permit List</p>
+      <Text style={styles.permit_list_p}>All Permit List</Text>
       <View style={styles.search_section}>
-      <TextInput
-        style={styles.search_box}
-        placeholder="Search Date..."
-        value={searchText}
-        onChangeText={text => setSearchText(text)} // Updates state on text input
-      />
-      <Icon name="search" size={30} style={styles.search_icon} onPress={handleSearch} />
-    </View>
-     
-     <View style={styles.permit_list}>
-       {data.map((item, index) =>(
-        <View style={styles.permit_list_card}>
-        <Text>{item.date}</Text>
-        <Icon name="arrow-right" size={30} style={styles.icon} onPress={()=>handleNavigateIndividualPermit(item.id)} />
-        </View>
-       ))}
-     </View>
+        <TextInput
+          style={styles.search_box}
+          placeholder="Search Date..."
+          value={searchText}
+          onChangeText={text => setSearchText(text)} // Updates state on text input
+        />
+        <Icon name="search" size={30} style={styles.search_icon} onPress={handleSearch} />
+      </View>
 
+      <View style={styles.permit_list}>
+        {formattedArray.map((item, index) => (
+          <View style={styles.permit_list_card} key={index}>
+            <Text>{item.permitCreateTime}</Text>
+            <Icon name="arrow-right" size={30} style={styles.icon} onPress={() => handleNavigateIndividualPermit(index)} />
+          </View>
+        ))}
+      </View>
     </ScrollView>
-  )
+  );
 }
 
-
 const styles = StyleSheet.create({
-  main_section:{
-    // backgroundColor:"#fff",
-    paddingTop:20,
-    paddingLeft:20,
-    paddingRight:20
+  main_section: {
+    paddingTop: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   search_section: {
-    flexDirection: 'row',  // Places input and button in a row
-    alignItems: 'center',  // Aligns items vertically centered
-    justifyContent: 'space-between', // Ensures equal space between items
-    // padding: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   search_box: {
-    flex: 1,  // Takes up the available space
+    flex: 1,
     height: 40,
     borderColor: '#000',
     borderWidth: 0.5,
     paddingHorizontal: 10,
-    marginLeft: 10,  
-    borderRadius:10,
-    width:120
+    marginLeft: 10,
+    borderRadius: 10,
+    width: 120,
   },
-  search_icon:{
-    borderRadius:20,
-    marginLeft:-50,
-    width:60,
-    cursor:"pointer"
+  search_icon: {
+    borderRadius: 20,
+    marginLeft: -50,
+    width: 60,
+    cursor: "pointer",
   },
-  permit_list:{
-     marginTop:30,
+  permit_list: {
+    marginTop: 30,
   },
-  permit_list_p:{
-    // backgroundColor:"#000"
-    color:"#000",
-    textAlign:"center",
-    fontSize:30,
-    fontWeight:"bold",
-    marginTop:20,
-    fontFamily: "Roboto, sans-serif",  // updated to a professional font
+  permit_list_p: {
+    color: "#000",
+    textAlign: "center",
+    fontSize: 30,
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom:30,
+    fontFamily: "Roboto, sans-serif",
   },
   permit_list_card: {
-    flexDirection: 'row',  // Ensures Text and Icon are in a row
-    alignItems: 'center',  // Vertically centers the Text and Icon
-    justifyContent: 'space-between',  // Places Text on the left and Icon on the right
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     padding: 10,
-    borderWidth:0,
-    borderColor: '#fff',  // Optional: Add border styling for the card
-    backgroundColor:"#E8E8E8",
-    borderRadius:10,
-    marginBottom:15,
+    backgroundColor: "#E8E8E8",
+    borderRadius: 10,
+    marginBottom: 15,
   },
   icon: {
-    color: '#000',  // Optional: Customize the icon color
-    cursor:"pointer"
+    color: '#000',
+    cursor: "pointer",
   },
-})
+});

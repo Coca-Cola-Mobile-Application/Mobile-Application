@@ -6,6 +6,8 @@ const bcrypt = require("bcryptjs");
 const LoginController = async (req, res) => {
         try {
           const user = await UserModel.findOne({ email: req.body.email });
+
+          console.log(user);
           
           if (!user) {
                   return res.status(200).send({

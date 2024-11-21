@@ -5,7 +5,9 @@ const bcrypt = require("bcryptjs")
 // Handle the user Registration
 const RegisterController = async (req, res) => {
         try {
-          const existingUser = await UserModel.find({email: req.body.email})
+          const existingUser = await UserModel.findOne({email: req.body.email})
+          console.log(existingUser);
+          
       
           if (existingUser) {
                   return res.status(200).send({
@@ -29,6 +31,7 @@ const RegisterController = async (req, res) => {
           res.status(201).send({
                   message: "Register Sucessfully",
                   success: true,
+                  newUser
       
           });
       

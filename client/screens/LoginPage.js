@@ -17,11 +17,20 @@ export default function LoginPage({navigation}) {
       }
       console.log(email, password);
       const loginResponse = await axios.post("http://localhost:8080/api/v1/user/login",{ email, password });
-
+      console.log(loginResponse.data.user.isAdmin);
+      
        if(loginResponse.data.success){
-        localStorage.setItem("token", loginResponse.data.data.token);
+        localStorage.setItem("token", loginResponse.data.token);
          alert(loginResponse.data.message)
-         navigation.navigate("Page One")
+
+         if(loginResponse.data.user.isAdmin){
+          navigation.navigate("dashboard")
+         }
+
+         if(!loginResponse.data.user.isAdmin){
+          navigation.navigate("HomePage")
+         }
+         
        }
      } catch (error) {
        alert(error)

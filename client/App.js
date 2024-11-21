@@ -39,6 +39,7 @@ import ForgetPassword from './screens/ForgetPassword';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import AdminSummery from './screens/adminSummery';
 import Dashboard from './screens/dashboad';
+import ApprovePermitView from './screens/permitView/approvePermitView';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,7 +47,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-          initialRouteName="HomePage" // Ensure this matches one of your screen names
+          initialRouteName="splash" // Ensure this matches one of your screen names
           screenOptions={{
             headerStyle: {
               backgroundColor: '#008000',
@@ -71,9 +72,11 @@ export default function App() {
           <Stack.Screen name="FillTypes" component={FillPermitStack} options={{ headerShown: false }}/>
           <Stack.Screen name="AcceptPermitList" component={AcceptPermitListStack}  options={{ headerShown: false }}/>
           <Stack.Screen name="My Profile" component={MyProfile} />
+          <Stack.Screen name="PermitView" component={ApprovePermitView} options={{ headerShown: true }} />
+
           {/* <Stack.Screen name="Analyze" component={AdminSummery} /> */}
           <Stack.Screen name="dashboard" component={Dashboard} options={{ headerShown: false }} />
-
+          
       </Stack.Navigator>
     </NavigationContainer>
   );
